@@ -44,7 +44,7 @@ class board:
     returns how many valid moves have been played
     '''
     def num_turns(self): 
-        return False
+        return self.num_turns
 
     '''
     given position in board, return 'x', 'o', or '_'
