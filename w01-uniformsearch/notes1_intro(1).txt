@@ -1,0 +1,159 @@
+AI: Class Notes 1
+Introduction
+Spring 2019
+
+1. What is AI?
+2. History of AI.
+3. Readings: 
+
+1. Turing paper Computing Machinery and Intelligence: http://www.loebner.net/Prizef/TuringArticle.html  
+2. John Searle (1980) Minds, brains, and programs. Behavioral and Brain Sciences 3 (3): 417-457: http://www.bbsonline.org/documents/a/00/00/04/84/bbs00000484-00/bbs.searle2.html     
+3. Minski's frames: http://web.media.mit.edu/~minsky/papers/Frames/frames.html     
+4. Newell and Simon: Logic Theory Machine, GPS (General Problem Solver)    
+5. Laird et al.: Soar Architecture, Anderson: ACT-R Cognitive Architecture
+
+
+1. What is AI?
+
+Many definitions of AI: 
+
+A machine that achieves or surpasses human-level intelligence. 
+
+AI methods can be grouped into four categories. 
+
+A) Act like humans AI.
+
+        Interact with humans:
+            - language
+            - games                        - sometimes better than humans 
+            - navigation                  - better than humans
+            - search in large spaces      - better than humans
+
+        No constraints on the methods:
+          
+Examples:  DeepBlue - chess computer defeated Gary Kasparov 1996  
+                    - Used brute force approach 
+                    - Parallel alpha-beta search on custom chips 
+                    - Looked ahead about 14 moves ahead
+                    - Evaluated 200 millions of positions per second
+                    - Had stored many opening moves
+          
+Turing Test (Alan Turing (1950) paper: Computing Machinery and Intelligence, Mind, 59) 
+
+An interrogator has a conversation with a machine. 
+A machine passes the test if a human interrogator cannot distinguish it from a machine, or if the machine fools the human 30% of the time. 
+	
+	A computer needs to have: 
+		Natural language processing - to understand and answer. 
+		Knowledge representation - to store information
+		Reasoning - to infer information based on the stored knowledge to answer 
+		questions
+		Machine learning - to adapt to new situations, to detect patterns.
+
+	Programs that attempted to pass the Turing test: 
+	
+		ELIZA, MGONZ (Internet chatbot), ALICE. 
+
+    Program passed the Turing test in 2014 = it was called Eugene Goostman and
+    it simulated a 13 year old boy (passed by fooling a human 33% of the time)
+
+Counter-example: 
+	
+The Chinese room (John Searle, 1980). A scenario that passes the Turing test, but where the agent does not understand its inputs and outputs. A human who understands English, a rule book, and some paper (blank, or indecipherable) sits inside a room. He receives papers with unknown symbols, it finds them in the rule book and it follows the instructions. It then sends back a paper with some symbols, based on the instructions, and other materials. 
+	
+An example of a test, where one receives questions and answers in Chinese, without understanding Chinese. 
+
+	--> Acting intelligently is different than thinking intelligently. 
+	
+	Syntax is different than semantics. Programs have syntax, minds have mental 
+	concepts, or semantics.
+	
+B) Think like humans AI.
+	
+	Machines that imitate the process of human thinking, not only the actions. 
+	Aim is to create programs that think like a human. 
+	Newell and Simon GPS program: General Problem Solver. 
+ 
+	Example: Play tic-tac-toe. A program would choose the best move from all 
+	available moves. It acts like a human. 
+	
+	A human would have a number of plans and will choose the move that takes it
+	closer to the goal. It will not exhaustively search for all possible
+	actions.
+	
+	Neural networks 
+	
+	Reinforcement learning
+	
+	Example: AlphaGo (AlphaZero) 
+	            - Deep learning with reinforcement learning
+	            - Learned by playing against itself. 
+	            - Won against the world master at Go
+	            - Discovered 'good' winning strategies	
+	
+C) Think rationally AI.
+
+	Knowledge is represented in a logical form. Objects and relations among them    
+	are represented by logical statements. New facts can be logically
+	(rationally) inferred from known ones.
+	
+	Example: All children like candies. 
+		     Mary is a child. -> Mary likes candies.
+	
+	Problem: Hard to write known facts in a formal logic way. Computationally 
+	expensive to infer knowledge from more than a few dozen facts.
+
+D) Act rationally AI.
+
+Agent: an autonomous system that perceives its environment, reacts to it, adapts to changes, pursues goals. 
+
+It needs to represent and store knowledge, to reason, to learn, and to understand natural language. 
+
+Intelligent agents: agents in real environments with continuous sensory inputs. Sensory perception is inherent uncertain -> Reasoning under uncertainty.
+
+The current approach. 
+
+Examples: Robotics, economics. 
+
+2. History of AI.
+
+McCulloch and Pitts (1943) - proposed an artificial neuron that could be on or off, depending on the state of the neighboring neurons. 
+
+Hebb (1949) proposed the Hebb learning rule between connecting neurons: if two connecting  neurons are active (on) together, then the strength of the connection between them should 
+go up. 
+
+Newell and Simona created two programs: Logic Theorist (LT) and GPS that could think logically and used them to demonstrate mathematical theorems. They were designed to imitate the way humans think. It could solve simple puzzles. It proposed the symbol processing approach, were a system using symbols has the necessary and sufficient means to generate intelligent actions. 
+
+John McCarthy defined LISP in 1958. The second high level programming language after Fortran. It became the dominant AI language. 
+
+Widrow - adaline neural networks (1962), and Rosenblatt (1962) perceptrons and delta rule (?).
+
+In the 70's, the initial enthusiasm of AI, diminished. The early solutions failed to scale up to more difficult problems. Natural language processing proved to be a more difficult task than initially thought. Syntactic rules were not enough to produce good translations from a language to another.
+
+Minsky and Papert book Perceptrons (1969) silenced the neural network community for about 20 years. It showed that 2 layer networks cannot solve the simple XOR rule. It took almost 20 years until a learning rule was found for networks with more than two layers (back-propagation learning algorithm).
+
+Knowledge based systems or expert systems
+
+Initial reasoning systems tried to use general purpose searching techniques to find solutions. They failed to scale up to more complex problems. They are called weak methods. 
+
+More powerful methods used domain specific knowledge and reasoning methods. Examples: medical diagnosis programs. 
+
+Expert systems have two components: a knowledge base and a reasoning mechanism. The reasoning contains rules extracted from human experts. 
+
+AI and industry: 
+
+Expert systems mostly.
+	Planning and scheduling systems.
+	Game playing: IBM's Deep Blue.
+	Medical diagnosis
+	
+Speech recognition, hand-written character recognition. 
+
+The return of the neural networks (1986 - present) 
+
+Connectionist vs. symbolic processing systems. The current opinion is somewhere in the middle.
+
+AI becomes a science. 
+
+Theories need to be proven either theoretically or by solid experimental results. AI it initially diverged from control systems, psychology, mathematics, now is mixing back with these areas. 
+

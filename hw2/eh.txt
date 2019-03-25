@@ -1,0 +1,23 @@
+forward checking : 
+  each queen has domain of valid entries.
+   send copies to eachh recursive call
+   if fail, go back
+   else
+    elim domains
+    cont
+
+    https://courses.cs.washington.edu/courses/cse473/15au/slides/04-csp-473.pdf
+    kill if a domain size is 0.
+
+    class q_domain
+      size = n
+      row[0 ... n-1]
+          0-> n/a
+          1-> avail
+      everytime DW, size --. this will be used to quickly check size of domains
+    
+
+    extra***
+    have min PQ of size of domains.
+    choose queen from that.
+        

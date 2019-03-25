@@ -1,0 +1,35 @@
+Pseudo-code for forward checking with heuristics
+
+Problem: 
+
+V = variables
+D = values
+C = constraints 
+
+initialize remaining_values = all values for all variables
+
+forward_checking(assignment, unassigned, remaining_values)
+
+    if assignment is complete
+        return assignment
+    else
+        select an unassigned variable()
+        while (select a value)
+            propagate the value and eliminate impossible values from other 
+            unassigned variable
+        
+        if all unassigned variable have non-zero remaining values
+                add new assignment to assignment 
+                remove from unassigned
+                return_value = forward_checking(new_assignment, unassigned)
+                if return_value is failure
+                    remove assignment
+                else
+                    return return_value
+            endif
+        
+        endwhile
+        
+        return failure
+         
+         

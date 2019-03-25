@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - N_Queens",
+            "request": "launch",
+            "mainClass": "N_Queens"
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+Thomas Mulvey
+2/20/19
+
+*notes* 
+  1) BFS is super slow and takes 60-120 seconds...just wait, it will end.
+  2) the program is python3, not 2. use "python3 mulvey_hw1.py" to run
+
+
+---Requirements---
+1) Represent a state:
+   - My class NodeState() at the top does this. Keeps track of cannibals/missionaries on the
+     left and right side of the river, position of the boat, and the cost so far(for A*).
+     The constructor will take (cannibals_left, missionaries_left, "BOAT_SIDE", cannibals_right, missionaries_right)
+
+2) Represent an action:
+   - Since there are no functions needed for actions,  I represented it as a tuple. 
+     (#cannibals to move, # missionaries to move, direction). If the boat was on the RIGHT
+     then the only valid options for actions were ones that moved LEFT.
+
+3) Function to check if next state is valid.
+   - is_valid_move(self, action) in NodeState() class does this. I send an action to the parent
+     and determine if its valid. If it is valid, i make a new NodeState and set the parent as the one
+     i just verified vs. I could have created a simpler is_valid function if I created a node using the
+     desired action, but i didn't know if that was ok.
+
+4) Node in the search tree:
+   - Similiar to #1, In the class I have a parent variable and a cost so far. A PQ is made using
+     the cost so far/depth of tree + estimation using heuristic and then the node. Thus the PQ looks something like
+     [ (0, Node1), (1, Node2), (1, Node3), (2, Node4), (3, Node 4), ... ]
+     The Nodes are the NodeState Class, which hold the parent, cost so far, current setup, etc. 
+     Due to the lack of a robust PQ class in python, and not necessarily wanting to waste time making one, i decided
+     to represent the nodes in PQ like that. The A* algorithm will take in count for taking top of PQ, estimating children
+     costs and adding them, etc. The BFS doesnt do any of this, its just a slow uninformed search.
+
+A) Implement an uninformed search algorithm. Nodes visited? Optimal ?
+   - implement uninform search : BFS
+   - Nodes visited : 11878 
+   - Optimal? : Yes, since its same cost. Just visits way too many nodes to find it...
+
+B) Propose ADMISSIBLE HEURISTIC. Justify it. Implement it. Nodes Visited? Optimal? Compare vs BFS.
+   - proposition: 
+     : relax/ignore rule that cannibals will eat missionaris. Also assume the boat is on the left always. 
+       Count how many trips it will take by totaling the # of people on the left, and can bring 2 at once. Then the
+   - Admissible? :Yes. This will underestimate the # of actual trips, or stay equal to it. The Max value it will guess for
+     everyone on the left side is 6. Shortest path is 12 total visited nodes. If 5 people on the left, it will guess 3. Real
+     value is about 9. Will only guess values 1-6. Can underestimate by a lot or get it equal if there are 2 or less people on the left.
+   - Implement it: A_star function does this.
+   - Nodes visited : 3344
+   - Optimal? : Yes  ( same actions are same cost )
+   - Comparison: BFS and A* will both find optimal paths, due to the fact each action is costs the same amount.
+     The difference comes to nodes visited /  time computing. The heuristic and PQ of the A* will push pointless nodes to
+     the end, and will visit much less nodes. Searching less nodes will take less time. BFS visited around 8k more nodes,
+     and with a better heuristic, could be even more. A* in this case will take about 20x shorter as well, (with my testing) 

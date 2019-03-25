@@ -1,0 +1,9 @@
+    Homework 2
+CSC 158, Spring 2019
+
+
+a) Implement the backtracking algorithm to solve the n-queens problem.
+
+b) Add  forward checking to the backtracking algorithm. Compare backtracking alone versus backtracking with forward checking for an increasing number of queens. 
+
+Turn in: Cover page, pseudo-code of your algorithm, code, sample outputs, comparison results, conclusion. 
