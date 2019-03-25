@@ -31,7 +31,11 @@ class board:
     returns TRUE if board is full (9 valid turns)
     '''
     def is_board_full(self):  
-        return False
+        count = 0
+        for char in self.board :
+            if char == 'X' or char == 'O':
+                count += 1
+        return count==9
 
     '''
     given move to row,col , is it in the playing area?
