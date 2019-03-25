@@ -63,4 +63,9 @@ class board:
     print the contents of da board
     '''
     def display_board(self):
-       return False
+        line1 = "  " + self.board[0] + " | " + self.board[1] + " | " + self.board[2]
+        line2 = "  " + self.board[3] + " | " + self.board[4] + " | " + self.board[5]
+        line3 = "  " + self.board[6] + " | " + self.board[7] + " | " + self.board[8]
+        print(line1)
+        print(line2)
+        print(line3)
