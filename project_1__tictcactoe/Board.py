@@ -57,7 +57,10 @@ class board:
     returns TRUE if valid, FALSE otherwise
     '''
     def make_move(self, player, move): 
-       return False
+       if(is_valid_move(move)):
+           self.board[move] = player
+           return True
+        return False
 
     '''
     print the contents of da board
