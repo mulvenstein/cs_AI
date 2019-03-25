@@ -13,27 +13,54 @@ class board:
     def __init__(self):
         self.board = [ '_' for _ in range(9) ] # inits board of 9 '_',
         self.turns_played = 0 #9 max.
-  
-    def is_winner(self, player): # given player 'x' or 'o' determine if thye are a winner
+
+    '''
+    given player 'x' or 'o' determine if thye are a winner
+    returns TRUE if player won, FALSE otherwise
+    '''
+    def is_winner(self, player): 
        return False
 
-    def is_tie(self): # returns true if board is full and neither x nor o won
+    '''
+    returns TRUE if board is full and neither player has won
+    '''
+    def is_tie(self):
        return False
 
-    def is_board_full(self): # is board full? 
+    '''
+    returns TRUE if board is full (9 valid turns)
+    '''
+    def is_board_full(self):  
        return False
 
-    def is_valid_move(self, move): # given move to row,col , is it in the playing area? 
+    '''
+    given move to row,col , is it in the playing area?
+    returns TRUE if yes, FALSE otherwise
+    '''
+    def is_valid_move(self, move):  
        return False
 
-    def num_turns(self): # returns how many turns have been played
+    '''
+    returns how many valid moves have been played
+    '''
+    def num_turns(self): 
        return False
 
-    def player_at(self, place): # given place in board, return 'x', 'o', or '_'
+    '''
+    given position in board, return 'x', 'o', or '_'
+    '''
+    def player_at(self, position):
        return False
     
-    def make_move(self, player, move): # given player 'x' or 'o' and a move, make it!
+    '''
+    given player 'x' or 'o' and a move, make it!
+    returns TRUE if valid, FALSE otherwise
+    '''
+    def make_move(self, player, move): 
        return False
 
-    def display_board(self): # print the contents of da board
+    '''
+    print the contents of da board
+    '''
+    def display_board(self):
        return False
