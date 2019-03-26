@@ -3,7 +3,7 @@ class Player(object):
         self.type = 'human'
 
     def move(self, board):
-        return int(raw_input('Your move? '))
+        return int(input('Your move? '))
 
     def available_moves(self, board):
         return [i + 1 for i in range(0, 9) if board[i] == ' ']

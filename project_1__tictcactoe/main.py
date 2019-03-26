@@ -5,6 +5,7 @@ sys.path.append( str(sys.path[0])+"/player_types" )
 
 from Player import *
 from MiniMax import *
+from TicTacToe import *
 
 def clear(): 
     # for windows 
@@ -26,9 +27,13 @@ def main():
         
         choice = int(input("  >> "))
         if choice is 1:
-            print("player v player!")
-            x = Player()
-            o = Player()
+            clear()
+            print("==!PLAYER vs PLAYER!==\n")
+            p1 = Player()
+            p2 = Player()
+            game = TicTacToe(p1, p2)
+            game.play_ttt()
+            a = input()
         elif choice is 2:
             print("Minimax_AI vs Player")
         elif choice is 3:

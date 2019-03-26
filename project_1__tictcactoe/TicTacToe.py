@@ -78,10 +78,13 @@ class TicTacToe:
     '''
     def display_board(self):
         line1 = "  " + self.board[0] + " | " + self.board[1] + " | " + self.board[2]
+        filler = "-------------"
         line2 = "  " + self.board[3] + " | " + self.board[4] + " | " + self.board[5]
         line3 = "  " + self.board[6] + " | " + self.board[7] + " | " + self.board[8]
         print(line1)
+        print(filler)
         print(line2)
+        print(filler)
         print(line3)
         print("\n")
 
@@ -113,4 +116,7 @@ class TicTacToe:
                 else:
                     print(str(self.winner) + " HAS WON")
 
-            self.turn = not self.turn
+            if self.turn == self.x:
+                self.turn = self.o
+            else:
+                self.turn = self.x
