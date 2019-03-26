@@ -3,6 +3,9 @@ import sys
 
 sys.path.append( str(sys.path[0])+"/player_types" )
 
+from Player import *
+from MiniMax import *
+
 def clear(): 
     # for windows 
     if name == 'nt': 
