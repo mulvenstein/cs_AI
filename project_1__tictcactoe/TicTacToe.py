@@ -51,6 +51,8 @@ class TicTacToe:
     returns TRUE if yes, FALSE otherwise
     '''
     def is_valid_move(self, move):
+        if move < 0 or move > 9: 
+            return False
         if self.board[int(move)] !='X' and self.board[int(move)] !='O':
             return True
         return False
@@ -69,16 +71,6 @@ class TicTacToe:
             return "INVALID"
         return self.board[position]
     
-    '''
-    given player 'x' or 'o' and a move, make it!
-    returns TRUE if valid, FALSE otherwise
-    '''
-    def make_move(self, player, move): 
-        if(self.is_valid_move(int(move))):
-            self.board[int(move)] = player
-            self.turns_played += 1
-            return True
-        return False
 
     '''
     print the contents of da board
