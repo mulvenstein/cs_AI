@@ -1,8 +1,7 @@
-class Board:
-    '''
+'''
     CLASS that defines the board and its behaviour over a tic tac toe game
-    '''
-
+'''
+class TicTacToe:
     '''
     CONSTRUCTOR: defines board to use in tic tac toe games
         constructor makes empty list of 9 _. 
@@ -10,11 +9,15 @@ class Board:
           3 | 4 | 5
           6 | 7 | 8
     ''' 
-    def __init__(self):
+    def __init__(self, x, o):
         self.board = [ '█' for _ in range(9) ] # inits board of 9 '_',
         self.turns_played = 0 #9 max.
         self.winning_moves = ( [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] )
         self.winner = None
+        self.x = x #whoever is x player, real or AI 
+        # note : X ALWAYS GOES FIRST
+        self.o = o #whoever is x player, real or AI
+        self.playerX_turn = True
 
     '''
     returns LIST of empty places on game board
@@ -119,3 +122,9 @@ class Board:
         print(line1)
         print(line2)
         print(line3)
+
+    '''
+    actually play the game!
+    '''
+    def play(self):
+        return

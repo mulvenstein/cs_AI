@@ -7,13 +7,15 @@ pth = re.sub('Algorithms', '', pth)
 sys.path.append(str(pth))
 
 from Board import *
+from Player import *
 
 # X IS MAX (computer) O IS MINS (human)
 # we will return score based off of X's position
-class MiniMax(Board):
+class MiniMax(Player):
     def _init__(self):
-        Board.__init__() #inits game board from Board class
-        self.score = 0
+        self.type = 'MiniMax'
+
+
     '''
     Pseudo code for minimax
         If the game is over, return the score from X's perspective.
@@ -27,22 +29,5 @@ class MiniMax(Board):
     depth 9: one move made
     etc
     '''
-    def play_minimax(self, depth):
-        # since depth 10 is empty board, and 9 is human made first move, depth%2==0 is comp/max and depth%2==1 is human/mins
-        if self.is_done() is True: #is there a winner?
-            if self.winner == 'X':
-                self.score = 10 # computer won!
-                return "Computer Won"
-            else:
-                self.score = -10 # human won...
-                return "Human Won"
-        if self.is_tie() is True: # theres a tie..
-            self.score = 0
-            return "Nobody Won"
-        
-        scores = list()
-        free_spaces = self.empty_positions()
-        for space in free_spaces:
-            print(space)
-
+    def play_minimax(self, board ):
         return False
