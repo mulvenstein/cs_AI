@@ -1,4 +1,4 @@
-class board:
+class Board:
     '''
     CLASS that defines the board and its behaviour over a tic tac toe game
     '''
@@ -21,12 +21,14 @@ class board:
     returns TRUE if player won, FALSE otherwise
     '''
     def is_winner(self, player): 
-        if (num_turns()) < 3: 
+        if self.num_turns()<3 or player!='X' and player !='O': 
+            print("HERE")
             return False
         else:
             for l in self.winning_moves:
-                if (player_at(l[0])) == (player_at(l[1])) == (player_at(l[2])) and (player_at(l[0])) !='█' :
-                    self.winner = (player_at(l[0]))
+                print("checking " + self.player_at(l[0]) + " AND " + self.player_at(l[1]) + " AND " + self.player_at(l[2]) )
+                if (self.player_at(l[0])) == (self.player_at(l[1])) == (self.player_at(l[2])) and (self.player_at(l[0])) !='█' :
+                    self.winner = (self.player_at(l[0]))
                     return True
             return False
 
@@ -34,9 +36,9 @@ class board:
     returns TRUE if board is full and neither player has won
     '''
     def is_tie(self):
-        if (num_turns()) != 9: #not enough movesfor tie
+        if (self.num_turns()) != 9: #not enough movesfor tie
             return False
-        if (is_winner('X') is False and is_winner('Y') is False):
+        if (self.is_winner('X') is False and self.is_winner('Y') is False):
             return True
         return False
 
@@ -54,19 +56,23 @@ class board:
     given move to row,col , is it in the playing area?
     returns TRUE if yes, FALSE otherwise
     '''
-    def is_valid_move(self, move):  
+    def is_valid_move(self, move):
+        if self.board[int(move)] !='X' and self.board[int(move)] !='O':
+            return True
         return False
 
     '''
     returns how many valid moves have been played
     '''
     def num_turns(self): 
-        return self.num_turns
+        return int(self.turns_played)
 
     '''
     given position in board, return 'x', 'o', or '_'
     '''
     def player_at(self, position):
+        if position > 9 or position < 0:
+            return "INVALID"
         return self.board[position]
     
     '''
@@ -74,8 +80,9 @@ class board:
     returns TRUE if valid, FALSE otherwise
     '''
     def make_move(self, player, move): 
-        if(is_valid_move(move)):
-            self.board[move] = player
+        if(self.is_valid_move(int(move))):
+            self.board[int(move)] = player
+            self.turns_played += 1
             return True
         return False
 
