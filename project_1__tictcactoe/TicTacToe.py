@@ -17,7 +17,7 @@ class TicTacToe:
         self.x = x #whoever is x player, real or AI 
         # note : X ALWAYS GOES FIRST
         self.o = o #whoever is x player, real or AI
-        self.playerX_turn = True
+        self.first_move = x
 
     '''
     returns LIST of empty places on game board
@@ -30,11 +30,11 @@ class TicTacToe:
         return res
 
     '''
-    given player 'x' or 'o' determine if thye are a winner
-    returns TRUE if player won, FALSE otherwise
+    returns TRUE if a player has won, or if there is a tie, FALSE otherwise
+    self.winner is updated with either 'X' 'O' or 'TIE'
     '''
-    def is_winner(self, player): 
-        if self.num_turns()<5 or player!='X' and player !='O': 
+    def is_game_done(self): 
+        if self.num_turns()<5: #impossible to get win without 5 min moves. save some cpu cycles 
             return False
         else:
             for l in self.winning_moves:
@@ -42,41 +42,9 @@ class TicTacToe:
                 if (self.player_at(l[0])) == (self.player_at(l[1])) == (self.player_at(l[2])) and (self.player_at(l[0])) !='█' :
                     self.winner = (self.player_at(l[0]))
                     return True
-            return False
-
-    '''
-    given current state, has anyone won??
-    '''
-    def is_done(self): 
-        if self.num_turns()<5: 
-            return False
-        else:
-            for l in self.winning_moves:
-                # print("checking " + self.player_at(l[0]) + " AND " + self.player_at(l[1]) + " AND " + self.player_at(l[2]) )
-                if (self.player_at(l[0])) == (self.player_at(l[1])) == (self.player_at(l[2])) and (self.player_at(l[0])) !='█' :
-                    self.winner = (self.player_at(l[0]))
-                    return True
-            return False
-
-    '''
-    returns TRUE if board is full and neither player has won
-    '''
-    def is_tie(self):
-        if (self.num_turns()) != 9: #not enough movesfor tie
-            return False
-        if (self.is_winner('X') is False and self.is_winner('Y') is False):
-            return True
-        return False
-
-    '''
-    returns TRUE if board is full (9 valid turns)
-    '''
-    def is_board_full(self):  
-        count = 0
-        for char in self.board :
-            if char == 'X' or char == 'O':
-                count += 1
-        return count==9
+            if self.num_turns() == 9: #no one won and 9 turns made
+                self.winner = 'TIE'
+                return True
 
     '''
     given move to row,col , is it in the playing area?
