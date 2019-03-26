@@ -14,13 +14,21 @@ class board:
         self.board = [ '█' for _ in range(9) ] # inits board of 9 '_',
         self.turns_played = 0 #9 max.
         self.winning_moves = ( [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] )
+        self.winner = None
 
     '''
     given player 'x' or 'o' determine if thye are a winner
     returns TRUE if player won, FALSE otherwise
     '''
     def is_winner(self, player): 
-        return False
+        if (num_turns()) < 3: 
+            return False
+        else:
+            for l in self.winning_moves:
+                if (player_at(l[0])) == (player_at(l[1])) = (player_at(l[2])) and (player_at(l[0])) !='█' :
+                    self.winner = (player_at(l[0]))
+                    return True
+            return False
 
     '''
     returns TRUE if board is full and neither player has won
