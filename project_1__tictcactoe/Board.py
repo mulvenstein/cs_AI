@@ -34,6 +34,10 @@ class board:
     returns TRUE if board is full and neither player has won
     '''
     def is_tie(self):
+        if (num_turns()) != 9: #not enough movesfor tie
+            return False
+        if (is_winner('X') is False and is_winner('Y') is False):
+            return True:
         return False
 
     '''
