@@ -13,6 +13,7 @@ class board:
     def __init__(self):
         self.board = [ '█' for _ in range(9) ] # inits board of 9 '_',
         self.turns_played = 0 #9 max.
+        self.winning_moves = ( [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] )
 
     '''
     given player 'x' or 'o' determine if thye are a winner
