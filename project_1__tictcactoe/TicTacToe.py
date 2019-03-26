@@ -94,6 +94,7 @@ class TicTacToe:
     def play_ttt(self):
         
         while True:
+            self.turns_played += 1
             if self.turn is self.x:
                 current_player = self.x
                 char = 'X'
@@ -115,6 +116,7 @@ class TicTacToe:
                     print("THERES A TIE")
                 else:
                     print(str(self.winner) + " HAS WON")
+                return True
 
             if self.turn == self.x:
                 self.turn = self.o
