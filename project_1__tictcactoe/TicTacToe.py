@@ -17,7 +17,7 @@ class TicTacToe:
         self.x = x #whoever is x player, real or AI 
         # note : X ALWAYS GOES FIRST
         self.o = o #whoever is x player, real or AI
-        self.first_move = x
+        self.turn = self.x #current turn
 
     '''
     returns LIST of empty places on game board
@@ -45,6 +45,7 @@ class TicTacToe:
             if self.num_turns() == 9: #no one won and 9 turns made
                 self.winner = 'TIE'
                 return True
+            return False
 
     '''
     given move to row,col , is it in the playing area?
@@ -82,9 +83,33 @@ class TicTacToe:
         print(line1)
         print(line2)
         print(line3)
+        print("\n")
 
     '''
     actually play the game!
     '''
-    def play(self):
-        return
+    def play_ttt(self):
+        
+        while True:
+            if self.turn is self.x:
+                current_player = self.x
+                char = 'X'
+            else:
+                current_player = self.o
+                char = 'O'
+
+            if player.type == 'human':
+                self.display_board()
+
+            move = current_player.move(self.board) #get move from player, validation is done within the current_players class
+            self.board[move] = char # place move
+
+            if self.is_game_done() is True:
+                print("\n")*100
+                self.display_board()
+                if self.winner == "TIE":
+                    print("THERES A TIE")
+                else:
+                    print(str(self.winner) + " HAS WON")
+
+            self.turn = not self.turn
