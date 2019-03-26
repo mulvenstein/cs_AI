@@ -1,6 +1,7 @@
 from os import system, name 
-import Player
-import MiniMax
+import sys
+
+sys.path.append( str(sys.path[0])+"/player_types" )
 
 def clear(): 
     # for windows 

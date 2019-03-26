@@ -1,9 +1,8 @@
 import sys
 import re
-import copy
 
 pth = str(sys.path[0])
-pth = re.sub('Algorithms', '', pth)
+pth = re.sub('player_types', '', pth)
 sys.path.append(str(pth))
 
 from Player import *
