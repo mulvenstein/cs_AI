@@ -17,6 +17,16 @@ class Board:
         self.winner = None
 
     '''
+    returns LIST of empty places on game board
+    '''
+    def empty_positions(self):
+        res = list()
+        for x in self.board:
+            if x is not 'X' or x is not 'O':
+                res.append(x)
+        return res
+
+    '''
     given player 'x' or 'o' determine if thye are a winner
     returns TRUE if player won, FALSE otherwise
     '''
