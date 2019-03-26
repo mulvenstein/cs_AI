@@ -1,3 +1,12 @@
+from os import system, name 
+def clear(): 
+    # for windows 
+    if name == 'nt': 
+        _ = system('cls') 
+    # for mac and linux(here, os.name is 'posix') 
+    else: 
+        _ = system('clear') 
+
 '''
     CLASS that defines the board and its behaviour over a tic tac toe game
 '''
@@ -109,12 +118,12 @@ class TicTacToe:
             self.board[move] = char # place move
 
             if self.is_game_done() is True:
-                s = "\n" * 100
-                print(s)    
+                clear()
                 self.display_board()
                 if self.winner == "TIE":
                     print("THERES A TIE")
                 else:
+                    clear()
                     print(str(self.winner) + " HAS WON")
                 return True
 
