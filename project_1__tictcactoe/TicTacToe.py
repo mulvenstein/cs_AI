@@ -98,7 +98,7 @@ class TicTacToe:
                 current_player = self.o
                 char = 'O'
 
-            if player.type == 'human':
+            if current_player.type == 'human':
                 self.display_board()
 
             move = current_player.move(self.board) #get move from player, validation is done within the current_players class
