@@ -8,12 +8,11 @@ sys.path.append(str(pth))
 from Board import *
 
 # X IS MAX O IS MINS
+# we will return score based off of X's position
 class MiniMax(Board):
     def _init__(self):
         Board.__init__() #inits game board from Board class
-
-    # need to add acutal algorithm!
-    
+        self.score = 0 # assume tie for now...
     '''
     finds best move given a board.
     returns TRUE if valid, FALSE otherwise

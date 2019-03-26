@@ -33,6 +33,20 @@ class Board:
             return False
 
     '''
+    given current state, has anyone won??
+    '''
+    def is_done(self): 
+        if self.num_turns()<5: 
+            return False
+        else:
+            for l in self.winning_moves:
+                # print("checking " + self.player_at(l[0]) + " AND " + self.player_at(l[1]) + " AND " + self.player_at(l[2]) )
+                if (self.player_at(l[0])) == (self.player_at(l[1])) == (self.player_at(l[2])) and (self.player_at(l[0])) !='█' :
+                    self.winner = (self.player_at(l[0]))
+                    return True
+            return False
+
+    '''
     returns TRUE if board is full and neither player has won
     '''
     def is_tie(self):
