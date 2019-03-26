@@ -6,7 +6,6 @@ pth = str(sys.path[0])
 pth = re.sub('Algorithms', '', pth)
 sys.path.append(str(pth))
 
-from Board import *
 from Player import *
 
 # X IS MAX (computer) O IS MINS (human)
