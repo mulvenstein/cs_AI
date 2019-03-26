@@ -22,11 +22,11 @@ class Board:
     '''
     def is_winner(self, player): 
         if self.num_turns()<3 or player!='X' and player !='O': 
-            print("HERE")
+            # print("HERE")
             return False
         else:
             for l in self.winning_moves:
-                print("checking " + self.player_at(l[0]) + " AND " + self.player_at(l[1]) + " AND " + self.player_at(l[2]) )
+                # print("checking " + self.player_at(l[0]) + " AND " + self.player_at(l[1]) + " AND " + self.player_at(l[2]) )
                 if (self.player_at(l[0])) == (self.player_at(l[1])) == (self.player_at(l[2])) and (self.player_at(l[0])) !='█' :
                     self.winner = (self.player_at(l[0]))
                     return True
