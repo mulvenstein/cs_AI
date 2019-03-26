@@ -105,7 +105,8 @@ class TicTacToe:
             self.board[move] = char # place move
 
             if self.is_game_done() is True:
-                print("\n")*100
+                s = "\n" * 100
+                print(s)    
                 self.display_board()
                 if self.winner == "TIE":
                     print("THERES A TIE")
