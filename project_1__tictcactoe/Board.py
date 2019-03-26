@@ -25,7 +25,7 @@ class board:
             return False
         else:
             for l in self.winning_moves:
-                if (player_at(l[0])) == (player_at(l[1])) = (player_at(l[2])) and (player_at(l[0])) !='█' :
+                if (player_at(l[0])) == (player_at(l[1])) == (player_at(l[2])) and (player_at(l[0])) !='█' :
                     self.winner = (player_at(l[0]))
                     return True
             return False
@@ -37,7 +37,7 @@ class board:
         if (num_turns()) != 9: #not enough movesfor tie
             return False
         if (is_winner('X') is False and is_winner('Y') is False):
-            return True:
+            return True
         return False
 
     '''
