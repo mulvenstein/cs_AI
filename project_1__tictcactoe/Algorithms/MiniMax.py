@@ -1,8 +1,12 @@
 import sys
-sys.path.insert(0, '../Board.py')
-print(sys.path)
-#from Board import *
+import re
 
-class MiniMax(Boards):
+pth = str(sys.path[0])
+pth = re.sub('Algorithms', '', pth)
+sys.path.append(str(pth))
+
+from Board import *
+
+class MiniMax(Board):
     def _init__(self):
-        print("hello world")
+        Board.__init__() #inits game board from Board class
