@@ -1,5 +1,6 @@
 import sys
 import re
+import copy
 
 pth = str(sys.path[0])
 pth = re.sub('Algorithms', '', pth)
@@ -38,4 +39,10 @@ class MiniMax(Board):
         if self.is_tie() is True: # theres a tie..
             self.score = 0
             return "Nobody Won"
+        
+        scores = list()
+        free_spaces = self.empty_positions()
+        for space in free_spaces:
+            print(space)
+
         return False

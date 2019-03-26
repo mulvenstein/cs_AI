@@ -32,7 +32,6 @@ class Board:
     '''
     def is_winner(self, player): 
         if self.num_turns()<5 or player!='X' and player !='O': 
-            # print("HERE")
             return False
         else:
             for l in self.winning_moves:
