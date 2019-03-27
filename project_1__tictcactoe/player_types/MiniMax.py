@@ -1,18 +1,15 @@
 import sys
 import re
-
-pth = str(sys.path[0])
-pth = re.sub('player_types', '', pth)
-sys.path.append(str(pth))
-
+import random
+import copy
 from Player import *
 
 # X IS MAX (computer) O IS MINS (human)
 # we will return score based off of X's position
 class MiniMax(Player):
-    def _init__(self):
+    def _init__(self, char='X'):
         self.type = 'MiniMax'
-
+        self.char = char # x or o player char
 
     '''
     Pseudo code for minimax
@@ -27,5 +24,9 @@ class MiniMax(Player):
     depth 9: one move made
     etc
     '''
-    def play_minimax(self, board ):
-        return False
+
+    def move(self, board): # ACTUAL MINIMAX ALGORITHM
+        if len(self.available_positions(board)) == 9:
+            return random.choice([0, 2, 6, 8]) #empty board, choose any corner
+        #assuming we are here, its our turn to use char self.char 
+        

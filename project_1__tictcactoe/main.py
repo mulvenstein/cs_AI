@@ -29,14 +29,21 @@ def main():
         if choice is 1:
             clear()
             print("==!PLAYER vs PLAYER!==\n")
-            p1 = Player()
-            p2 = Player()
+            p1 = Player('X')
+            p2 = Player('O')
             game = TicTacToe(p1, p2)
             game.play_ttt()
             print("\n...press enter to continue.")
             a = input()
         elif choice is 2:
-            print("Minimax_AI vs Player")
+            clear()
+            print("==!MINIMAX vs PLAYER!==\n")
+            p1 = MiniMax('X')
+            p2 = Player('O')
+            game = TicTacToe(p1, p2)
+            game.play_ttt()
+            print("\n...press enter to continue.")
+            a = input()
         elif choice is 3:
             print("TY FOR COMING")
             return
