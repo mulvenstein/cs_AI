@@ -33,6 +33,7 @@ def main():
             p2 = Player()
             game = TicTacToe(p1, p2)
             game.play_ttt()
+            print("\n...press enter to continue.")
             a = input()
         elif choice is 2:
             print("Minimax_AI vs Player")

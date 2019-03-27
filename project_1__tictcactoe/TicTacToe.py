@@ -124,6 +124,7 @@ class TicTacToe:
                     print("THERES A TIE")
                 else:
                     clear()
+                    self.display_board()
                     print(str(self.winner) + " HAS WON")
                 return True
 
