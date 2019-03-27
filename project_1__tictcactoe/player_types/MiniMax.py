@@ -25,8 +25,63 @@ class MiniMax(Player):
     etc
     '''
 
-    def move(self, board): # ACTUAL MINIMAX ALGORITHM
-        if len(self.available_positions(board)) == 9:
-            return random.choice([0, 2, 6, 8]) #empty board, choose any corner
-        #assuming we are here, its our turn to use char self.char 
+    '''
+    is game filled?
+    '''
+    def is_full(self, board):
+        return board.count('█')==0
+
+    '''
+    is game done given board state?
+    returns (TRUE, CHAR of WINNER) or FALSE
+    '''
+    def is_done(self, board):
+        for a, b, c in [(0, 1, 2), (3, 4, 5), (6, 7, 8),
+                        (0, 3, 6), (1, 4, 7), (2, 5, 8),
+                        (0, 4, 8), (2, 4, 6)]:
+            if self.char == board[a] == board[b] == board[c]:
+                return (True, 1) # minimax won
+            elif board[a] == board[b] == board[c] != '█' and board[a] != self.char:
+                return (True, -1) #opponent won
+
+        if not any([space == '█' for space in board]):
+            return (True, 0) #TIE
+
+        return (False, 0)
+
+    def is_my_turn(self, board):
+        check = self.char
+        count = 0
+        for i in board:
+            if i == check:
+                count += 1
+                continue
+            elif i == '█':
+                continue
+            count -= 1 
+        if (count == 0 and self.char == 'X') or count == -1: 
+            return True
+        else:
+            return False
+
+
+    def solve(self, board): # ACTUAL MINIMAX ALGORITHM
+        # if len(self.available_positions(board)) == 9:
+        #     return random.choice([0, 2, 6, 8]) #empty board, choose any corner. this will just help wth branching factor
+        # # current setup is 'board'
+
+        if self.is_full(board):
+            return 0 # TIE, VALUE IS 0
+            
+        turn = None
+        if self.is_my_turn(board):
+            turn = True
+        else:
+            turn = False
+        
+        branches = self.available_positions(board)
+        branch_evaluations = [solve(twig) for twig in branches]
+
+
+
         

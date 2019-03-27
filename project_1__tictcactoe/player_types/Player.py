@@ -10,4 +10,4 @@ class Player(object):
                 return move
 
     def available_positions(self, board):
-        return [i + 1 for i in range(0, 9) if board[i] == '█']
+        return [i for i in range(0, 9) if board[i] == '█']
