@@ -92,7 +92,7 @@ class MiniMax(Player):
         else:
             c = 'X'
 
-        for moves in self.available_moves(board):
+        for moves in self.available_positions(board):
             board[moves] = c
             value = min(value, self.max_value(board))
             board[moves] = '█'

@@ -103,6 +103,7 @@ class TicTacToe:
     def play_ttt(self):
         
         while True:
+            clear()
             self.turns_played += 1
             if self.turn is self.x:
                 current_player = self.x
