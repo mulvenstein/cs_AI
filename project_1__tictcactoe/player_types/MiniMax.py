@@ -2,6 +2,7 @@ import sys
 import re
 import random
 import copy
+import math 
 from Player import *
 
 # X IS MAX (computer) O IS MINS (human)
@@ -26,14 +27,8 @@ class MiniMax(Player):
     '''
 
     '''
-    is game filled?
-    '''
-    def is_full(self, board):
-        return board.count('█')==0
-
-    '''
     is game done given board state?
-    returns (TRUE, CHAR of WINNER) or FALSE
+    returns (TRUE, value of state [10 win, -10 lost] ) or FALSE
     '''
     def is_terminal_state(self, board):
         winning_states = ( [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] )
@@ -53,39 +48,16 @@ class MiniMax(Player):
 
         return (False, 0)
 
-    def is_my_turn(self, board):
-        check = self.char
-        count = 0
-        for i in board:
-            if i == check:
-                count += 1
-                continue
-            elif i == '█':
-                continue
-            count -= 1 
-        if (count == 0 and self.char == 'X') or count == -1: 
-            return True
-        else:
-            return False
-
-
-    def solve(self, board): # ACTUAL MINIMAX ALGORITHM
-        # if len(self.available_positions(board)) == 9:
-        #     return random.choice([0, 2, 6, 8]) #empty board, choose any corner. this will just help wth branching factor
-        # # current setup is 'board'
-
-        if self.is_full(board):
-            return 0 # TIE, VALUE IS 0
+        def move(self, board): #acutal MINIMAX IMPLEMENTATION
+            # in order to cut down brnaching factor a bit, IF ai 
+            #  is going first, just choose a corner.
+            if len( self.available_positions(board) ) == 0:
+                return int( random.choice[0,2,6,8] )
             
-        turn = None
-        if self.is_my_turn(board):
-            turn = True
-        else:
-            turn = False
-        
-        branches = self.available_positions(board)
-        branch_evaluations = [solve(twig) for twig in branches]
-
-
+            # ON THE MINIMAX TURN, YOU WANT THE BEST (MAX) OF THE OTHER PLAYERS TURNS(MIN)
+            max_val = 0 #tie in worst case
+            
+            for moves in self.available_positions(board) :
+                board[moves] = self.char
 
         
