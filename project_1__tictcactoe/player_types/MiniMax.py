@@ -35,17 +35,21 @@ class MiniMax(Player):
     is game done given board state?
     returns (TRUE, CHAR of WINNER) or FALSE
     '''
-    def is_done(self, board):
-        for a, b, c in [(0, 1, 2), (3, 4, 5), (6, 7, 8),
-                        (0, 3, 6), (1, 4, 7), (2, 5, 8),
-                        (0, 4, 8), (2, 4, 6)]:
-            if self.char == board[a] == board[b] == board[c]:
-                return (True, 1) # minimax won
-            elif board[a] == board[b] == board[c] != '█' and board[a] != self.char:
-                return (True, -1) #opponent won
-
-        if not any([space == '█' for space in board]):
-            return (True, 0) #TIE
+    def is_terminal_state(self, board):
+        winning_states = ( [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] )
+        for a,b,c in winning_states:
+            if board[a]==board[b]==board[c]==self.char:
+                return (True, 10) #minimax won!
+            elif board[a]==board[b]==board[c]!=self.char!='█':
+                return (True, -10) #other player won
+        
+        space_counter = 0
+        for spot in board:
+            if spot=='█':
+                space_counter+=1
+        
+        if space_counter==9: #TIE
+            return (True,0)
 
         return (False, 0)
 
