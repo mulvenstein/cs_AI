@@ -48,56 +48,56 @@ class MiniMax(Player):
 
         return (False, 0)
 
-        def move(self, board): #acutal MINIMAX IMPLEMENTATION
-            # in order to cut down brnaching factor a bit, IF ai 
-            #  is going first, just choose a corner.
-            if len( self.available_positions(board) ) == 0:
-                return int( random.choice[0,2,6,8] )
-            
-            # ON THE MINIMAX TURN, YOU WANT THE BEST (MAX) OF THE OTHER PLAYERS TURNS(MIN)
-            worst_case = 0 #tie in worst case
-            
-            for moves in self.available_positions(board) :
-                board[moves] = self.char
-                board_val = min_value(board)
-                board[moves] = '█'
-                if board_val > worst_case:
-                    return moves
+    def move(self, board): #acutal MINIMAX IMPLEMENTATION
+        # in order to cut down brnaching factor a bit, IF ai 
+        #  is going first, just choose a corner.
+        if len( self.available_positions(board) ) == 0:
+            return int( random.choice[0,2,6,8] )
+        
+        # ON THE MINIMAX TURN, YOU WANT THE BEST (MAX) OF THE OTHER PLAYERS TURNS(MIN)
+        worst_case = 0 #tie in worst case
+          
+        for moves in self.available_positions(board) :
+            board[moves] = self.char
+            board_val = min_value(board)
+            board[moves] = '█'
+            if board_val > worst_case:
+                return moves
 
-            # if cant find a move there, just take a tie from here.    
-            return random.choice(self.available_moves(board))
+        # if cant find a move there, just take a tie from here.    
+        return random.choice(self.available_moves(board))
 
-        def max_value(self, board):
-            board_done, return_value = self.is_terminal_state(board)
-            if board_done: # if current board is done, return -10, 0 , 10
-                return return_value
+    def max_value(self, board):
+        board_done, return_value = self.is_terminal_state(board)
+        if board_done: # if current board is done, return -10, 0 , 10
+            return return_value
 
-            value = -math.inf
-            for moves in self.available_positions(board):
-                board[moves] = self.char
-                value = max(value, self.min_value(board))
-                board[moves] = '█'
+        value = -math.inf
+        for moves in self.available_positions(board):
+            board[moves] = self.char
+            value = max(value, self.min_value(board))
+            board[moves] = '█'
 
-            return value
+        return value
 
-        def min_value(self, board):
-            board_done, return_value = self.is_terminal_state(board)
-            if board_done:
-                return return_value
+    def min_value(self, board):
+        board_done, return_value = self.is_terminal_state(board)
+        if board_done:
+            return return_value
 
-            value = math.inf
-            c = ''
-            if self.char == 'X':
-                c = 'O'
-            else:
-                c = 'X'
+        value = math.inf
+        c = ''
+        if self.char == 'X':
+            c = 'O'
+        else:
+            c = 'X'
 
-            for moves in self.available_moves(board):
-                board[moves] = c
-                value = min(value, self.max_value(board))
-                board[moves] = '█'
+        for moves in self.available_moves(board):
+            board[moves] = c
+            value = min(value, self.max_value(board))
+            board[moves] = '█'
 
-            return value
+        return value
                     
 
         
