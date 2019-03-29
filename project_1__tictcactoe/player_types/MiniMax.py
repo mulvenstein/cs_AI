@@ -59,13 +59,13 @@ class MiniMax(Player):
           
         for moves in self.available_positions(board) :
             board[moves] = self.char
-            board_val = min_value(board)
+            board_val = self.min_value(board)
             board[moves] = '█'
             if board_val > worst_case:
                 return moves
 
         # if cant find a move there, just take a tie from here.    
-        return random.choice(self.available_moves(board))
+        return random.choice(self.available_positions(board))
 
     def max_value(self, board):
         board_done, return_value = self.is_terminal_state(board)
