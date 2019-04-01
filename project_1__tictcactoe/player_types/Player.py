@@ -1,6 +1,6 @@
-class Player(object):
+class Player:
     def __init__(self, char='X'):
-        self.type = 'human'
+        self.kind = 'human'
         self.char = char
 
     def move(self, board):

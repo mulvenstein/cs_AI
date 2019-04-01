@@ -8,23 +8,14 @@ from Player import *
 # X IS MAX (computer) O IS MINS (human)
 # we will return score based off of X's position
 class MiniMax(Player):
-    def _init__(self, char='X'):
-        self.type = 'MiniMax'
-        self.char = char # x or o player char
-
-    '''
-    Pseudo code for minimax
-        If the game is over, return the score from X's perspective.
-        Otherwise get a list of new game states for every possible move
-        Create a scores list
-        For each of these states add the minimax result of that state to the scores list
-        If it's X's turn, return the maximum score from the scores list
-        If it's O's turn, return the minimum score from the scores list
+    def __init__(self, char='X'):
+        self.char = char
+        self.kind = 'MiniMax'
     
-    depth 10: empty board
-    depth 9: one move made
-    etc
-    '''
+    def update_kind(self):
+        print("updating kind...")
+        self.kind = "MiniMax"
+        print("self.kind")
 
     '''
     is game done given board state?
@@ -51,8 +42,8 @@ class MiniMax(Player):
     def move(self, board): #acutal MINIMAX IMPLEMENTATION
         # in order to cut down brnaching factor a bit, IF ai 
         #  is going first, just choose a corner.
-        if len( self.available_positions(board) ) == 0:
-            return int( random.choice[0,2,6,8] )
+        if len( self.available_positions(board) ) == 9:
+            return random.choice( [0,2,6,8] )
         
         # ON THE MINIMAX TURN, YOU WANT THE BEST (MAX) OF THE OTHER PLAYERS TURNS(MIN)
         worst_case = 0 #tie in worst case
@@ -72,10 +63,11 @@ class MiniMax(Player):
         if board_done: # if current board is done, return -10, 0 , 10
             return return_value
 
-        value = -math.inf
+        value = -10000
+
         for moves in self.available_positions(board):
             board[moves] = self.char
-            value = max(value, self.min_value(board))
+            value = max( value, self.min_value(board) )
             board[moves] = '█'
 
         return value
@@ -85,7 +77,7 @@ class MiniMax(Player):
         if board_done:
             return return_value
 
-        value = math.inf
+        value = 10000
         c = ''
         if self.char == 'X':
             c = 'O'
@@ -94,10 +86,7 @@ class MiniMax(Player):
 
         for moves in self.available_positions(board):
             board[moves] = c
-            value = min(value, self.max_value(board))
+            value = min( value, self.max_value(board) )
             board[moves] = '█'
 
         return value
-                    
-
-        

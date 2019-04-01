@@ -1,4 +1,6 @@
-from os import system, name 
+from os import system, name
+import time
+
 def clear(): 
     # for windows 
     if name == 'nt': 
@@ -29,16 +31,6 @@ class TicTacToe:
         self.turn = self.x #current turn
 
     '''
-    returns LIST of empty places on game board
-    '''
-    def empty_positions(self):
-        res = list()
-        for x in self.board:
-            if x is not 'X' or x is not 'O':
-                res.append(x)
-        return res
-
-    '''
     returns TRUE if a player has won, or if there is a tie, FALSE otherwise
     self.winner is updated with either 'X' 'O' or 'TIE'
     '''
@@ -55,17 +47,6 @@ class TicTacToe:
                 self.winner = 'TIE'
                 return True
             return False
-
-    '''
-    given move to row,col , is it in the playing area?
-    returns TRUE if yes, FALSE otherwise
-    '''
-    def is_valid_move(self, move):
-        if move < 0 or move > 9: 
-            return False
-        if self.board[int(move)] !='X' and self.board[int(move)] !='O':
-            return True
-        return False
 
     '''
     returns how many valid moves have been played
@@ -86,10 +67,17 @@ class TicTacToe:
     print the contents of da board
     '''
     def display_board(self):
-        line1 = "  " + self.board[0] + " | " + self.board[1] + " | " + self.board[2]
+        s=['█' for _ in range(9)]
+        for i in range(0,9):
+            if self.board[i] == '█':
+                s[i] = i
+            else:
+                s[i] = self.board[i]
+
+        line1 = "  " + str(s[0]) + " | " + str(s[1]) + " | " + str(s[2])
         filler = "-------------"
-        line2 = "  " + self.board[3] + " | " + self.board[4] + " | " + self.board[5]
-        line3 = "  " + self.board[6] + " | " + self.board[7] + " | " + self.board[8]
+        line2 = "  " + str(s[3]) + " | " + str(s[4]) + " | " + str(s[5])
+        line3 = "  " + str(s[6]) + " | " + str(s[7]) + " | " + str(s[8])
         print(line1)
         print(filler)
         print(line2)
@@ -112,7 +100,7 @@ class TicTacToe:
                 current_player = self.o
                 char = 'O'
 
-            if current_player.type == 'human':
+            if current_player.kind == 'human':
                 self.display_board()
 
             move = current_player.move(self.board) #get move from player, validation is done within the current_players class
@@ -128,6 +116,10 @@ class TicTacToe:
                     self.display_board()
                     print(str(self.winner) + " HAS WON")
                 return True
+
+            if current_player.kind == 'MiniMax':
+                self.display_board()
+                time.sleep(1.5)
 
             if self.turn == self.x:
                 self.turn = self.o
