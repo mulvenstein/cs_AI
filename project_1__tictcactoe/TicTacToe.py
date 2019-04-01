@@ -117,7 +117,7 @@ class TicTacToe:
                     print(str(self.winner) + " HAS WON")
                 return True
 
-            if current_player.kind == 'MiniMax':
+            if self.x.kind == 'MiniMax' == self.o.kind :
                 self.display_board()
                 time.sleep(1.5)
 
