@@ -11,7 +11,7 @@ class MiniMax(Player):
     def __init__(self, char='X'):
         self.char = char
         self.kind = 'MiniMax'
-        
+
     '''
     is game done given board state?
     returns (TRUE, value of state [10 win, -10 lost] ) or FALSE
@@ -33,32 +33,6 @@ class MiniMax(Player):
             return (True,0)
 
         return (False, 0) # aint over yet chief
-
-    '''
-    MINIMAX(s)
-    For every a ∊ Actions(s)
-        if MIN-VALUE(RESULT(s, a)) > UTILITY(RESULT(s, best))
-            best = a
-    return best
-    
-    MIN-VALUE(s)
-    If GAME-OVER(s)
-        return UTILITY(s)
-    For every a ∊ Actions(s)
-        sim-utility = MAX-VALUE(RESULT(s, a))
-        if sim-utility < worst
-            worst = sim-utility
-    return worst
-
-    MAX-VALUE(s)
-    If GAME-OVER(s)
-        return UTILITY(s)
-    For every a ∊ Actions(s)
-        sim-utility = MIN-VALUE(RESULT(s, a))
-        if sim-utility > best
-            best = sim-utility
-    return best
-    '''     
 
     def move(self, board): #acutal MINIMAX IMPLEMENTATION
         # in order to cut down brnaching factor a bit, IF ai 
@@ -112,19 +86,3 @@ class MiniMax(Player):
             board[moves] = '█'
 
         return value
-
-    '''
-    for move in game.get_available_moves():
-		possible_game = game.get_new_state(move)
-		scores.append(minimax(possible_game, depth))
-		moves.append(move)
-
-	if game.active_turn == 'X':
-		max_score_index = scores.index(max(scores))
-		choice = moves[max_score_index]
-		return scores[max_score_index]
-	else:
-		min_score_index = scores.index(min(scores))
-		choice = moves[min_score_index]
-		return scores[min_score_index]
-    '''
