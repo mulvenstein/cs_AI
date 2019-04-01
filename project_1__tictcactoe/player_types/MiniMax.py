@@ -11,12 +11,7 @@ class MiniMax(Player):
     def __init__(self, char='X'):
         self.char = char
         self.kind = 'MiniMax'
-    
-    def update_kind(self):
-        print("updating kind...")
-        self.kind = "MiniMax"
-        print("self.kind")
-
+        
     '''
     is game done given board state?
     returns (TRUE, value of state [10 win, -10 lost] ) or FALSE
@@ -31,10 +26,10 @@ class MiniMax(Player):
         
         space_counter = 0
         for spot in board:
-            if spot=='█':
+            if spot!='█':
                 space_counter+=1
         
-        if space_counter==0: #TIE
+        if space_counter==9: #TIE
             return (True,0)
 
         return (False, 0) # aint over yet chief
