@@ -23,7 +23,7 @@ def main():
         print("!===MULVEY TIC TAC TOE===!")
         print("  1. PvP")
         print("  2. Minimax vs Player")
-        print("  3. Minimax vs Minimax")
+        print("  3. Watch Minimax vs Minimax")
         print("  4. Exit")
 
         choice = int(input("  >> "))
@@ -49,7 +49,7 @@ def main():
             a = input()
         elif choice is 3:
             clear()
-            print("==!MINIMAX vs PLAYER!==\n")
+            print("==!MINIMAX vs MiniMax!==\n")
             p1 = MiniMax('X')
             p2 = MiniMax('O')
             game = TicTacToe(p1, p2)
