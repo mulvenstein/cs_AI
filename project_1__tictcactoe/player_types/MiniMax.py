@@ -41,9 +41,8 @@ class MiniMax(Player):
             return random.choice( [0,2,6,8] )
         
         # ON THE MINIMAX TURN, YOU WANT THE BEST (MAX) OF THE OTHER PLAYERS TURNS(MIN)
-        worst_case = 0 #tie in worst case
-        moves=[-10 for _ in range(9)]
-        for move in self.available_positions(board) :
+        moves=[-10 for _ in range(9)] #move values
+        for move in self.available_positions(board) : # for every child, is it a winner? is a successor a winner? else play random
             board[int(move)] = str(self.char)
             r = (self.is_terminal_state(board))[0]
             if (self.is_terminal_state(board))[0] is True:
@@ -52,7 +51,7 @@ class MiniMax(Player):
             board[move] = '█'
             moves[move] = board_val
 
-        # try all moves where its a tie, if enemy places at this move, then game over, then place
+        # try all moves where its currently a tie, if enemy places at this move, then game over, so place a blocker
         c=0
         for i in moves:
             if i == 0 and board[c] == '█':
