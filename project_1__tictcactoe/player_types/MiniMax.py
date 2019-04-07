@@ -51,7 +51,7 @@ class MiniMax(Player):
             board[move] = '█'
             moves[move] = board_val
 
-        # try all moves where its currently a tie, if enemy places at this move, then game over, so place a blocker
+        # game would sometimes choose a slower win so this forces it to choose immediate win
         c=0
         for i in moves:
             if i == 0 and board[c] == '█':

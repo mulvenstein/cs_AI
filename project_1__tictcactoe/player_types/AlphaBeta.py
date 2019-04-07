@@ -10,36 +10,6 @@ class AlphaBeta(Player):
         else :
             self.opponent = 'X'
 
-
-    '''
-    move calls alphabeta with is maximizing true
-    
-    def alphabeta(state, depth, is maximizing, alpha,beta)
-
-    if node is a terminal node :
-        return value of the node
-    
-    if isMaximizingPlayer :
-        bestVal = -INFINITY 
-        for each child node :
-            value = alphabeta(node, depth+1, false, alpha, beta)
-            bestVal = max( bestVal, value) 
-            alpha = max( alpha, bestVal)
-            if beta <= alpha:
-                break
-        return bestVal
-
-    else :
-        bestVal = +INFINITY 
-        for each child node :
-            value = minimax(node, depth+1, true, alpha, beta)
-            bestVal = min( bestVal, value) 
-            beta = min( beta, bestVal)
-            if beta <= alpha:
-                break
-        return bestVal
-    '''
-
     '''
     is game done given board state?
     returns (TRUE, value of state [10 win, -10 lost] ) or FALSE
@@ -71,9 +41,45 @@ class AlphaBeta(Player):
         if len( self.available_positions(board) ) == 9:
             return random.choice( [0,2,6,8] )
 
+        ALPHA = -10000
+        BETA = 10000
+        VALUE = -10000
+        turn = False # we are trying a position so the next turn isnt ours
 
+        move_val = [ -10 for _ in range(9) ]
+        for moves in self.available_positions(board):
+            # try AB search on every child state and use best!
+            board[moves] = self.char
+            test_vale = alpha_beta(board, turn, ALPHA, BETA):
+            board[moves] = '█'
+            move_val[moves] = test_vale
+
+        # pick max index and return!
 
         return
     
-
-        
+    def alpha_beta(self, board, turn, ALPHA , BETA): #just gonna use one function and splt it up instead of having a  min and max alphabeta
+        if turn == True: #max, cpu turn
+            best = -10000
+            turn = not turn
+            for moves in self.available_positions(board):
+                board[moves] = self.char 
+                value = alpha_beta(board, turn, alpha, beta)
+                board[moves] = '█' # try and set move back
+                best = max( best, value) 
+                ALPHA = max( ALPHA , best)
+                if BETA <= ALPHA:
+                    break
+            return best
+        else: #min, opp turn
+            turn = not turn
+            best = 10000  
+            for moves in self.available_positions(board):
+                board[moves] = self.opponent
+                value = alpha_beta(board, turn, ALPHA, BETA)
+                board[moves] = '█'
+                best = min( best, value) 
+                BETA = min( BETA, bestVal)
+                if BETA <= ALPHA:
+                    break
+            return best
