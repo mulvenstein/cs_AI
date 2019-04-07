@@ -50,15 +50,21 @@ class AlphaBeta(Player):
         for moves in self.available_positions(board):
             # try AB search on every child state and use best!
             board[moves] = self.char
-            test_vale = alpha_beta(board, turn, ALPHA, BETA):
+            test_value = alpha_beta(board, turn, ALPHA, BETA):
             board[moves] = '█'
-            move_val[moves] = test_vale
+            move_val[moves] = test_value
 
         # pick max index and return!
 
         return
     
     def alpha_beta(self, board, turn, ALPHA , BETA): #just gonna use one function and splt it up instead of having a  min and max alphabeta
+        # if terminal state, return val of win or loss
+        # else keep playing
+        res =  self.is_terminal_state(board):
+        if res[0] is True:
+            return res[1]
+
         if turn == True: #max, cpu turn
             best = -10000
             turn = not turn
