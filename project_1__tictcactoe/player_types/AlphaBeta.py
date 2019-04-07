@@ -55,8 +55,7 @@ class AlphaBeta(Player):
             move_val[moves] = test_value
 
         # pick max index and return!
-
-        return
+        return move_val.index(max(move_val))
     
     def alpha_beta(self, board, turn, ALPHA , BETA): #just gonna use one function and splt it up instead of having a  min and max alphabeta
         # if terminal state, return val of win or loss
