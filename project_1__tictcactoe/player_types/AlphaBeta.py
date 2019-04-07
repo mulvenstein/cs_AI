@@ -50,7 +50,7 @@ class AlphaBeta(Player):
         for moves in self.available_positions(board):
             # try AB search on every child state and use best!
             board[moves] = self.char
-            test_value = alpha_beta(board, turn, ALPHA, BETA)
+            test_value = self.alpha_beta(board, turn, ALPHA, BETA)
             board[moves] = '█'
             move_val[moves] = test_value
 
@@ -69,7 +69,7 @@ class AlphaBeta(Player):
             turn = not turn
             for moves in self.available_positions(board):
                 board[moves] = self.char 
-                value = alpha_beta(board, turn, alpha, beta)
+                value = self.alpha_beta(board, turn, ALPHA, BETA)
                 board[moves] = '█' # try and set move back
                 best = max( best, value) 
                 ALPHA = max( ALPHA , best)
@@ -81,10 +81,10 @@ class AlphaBeta(Player):
             best = 10000  
             for moves in self.available_positions(board):
                 board[moves] = self.opponent
-                value = alpha_beta(board, turn, ALPHA, BETA)
+                value = self.alpha_beta(board, turn, ALPHA, BETA)
                 board[moves] = '█'
                 best = min( best, value) 
-                BETA = min( BETA, bestVal)
+                BETA = min( BETA, best)
                 if BETA <= ALPHA:
                     break
             return best

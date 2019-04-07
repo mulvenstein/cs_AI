@@ -25,9 +25,10 @@ def main():
         print("  1. PvP")
         print("  2. Minimax vs Player")
         print("  3. Watch Minimax vs Minimax")
-        print("  4. AB vs Human"
-        print("  5. AB vs AB"
-        print("  6. Exit")
+        print("  4. AB vs Human")
+        print("  5. WATCH AB vs MiniMax")
+        print("  6. WATCH AB vs AB")
+        print("  7. Exit")
 
         choice = int(input("  >> "))
         if choice is 1:
@@ -74,7 +75,7 @@ def main():
             a = input()
         elif choice is 5:
             clear()
-            print("==!ALPHABETA vs MiniMax!==\n")
+            print("==!WATCH ALPHABETA vs MiniMax!==\n")
             p1 = MiniMax('X')
             p2 = AlphaBeta('O')
             game = TicTacToe(p1, p2)
@@ -84,6 +85,17 @@ def main():
             print("\n...press enter to continue.")
             a = input()
         elif choice is 6:
+            clear()
+            print("==!WATCH ALPHABETA vs ALPHABETA!==\n")
+            p1 = AlphaBeta('X')
+            p2 = AlphaBeta('O')
+            game = TicTacToe(p1, p2)
+            game.play_ttt()
+            del p1
+            del p2
+            print("\n...press enter to continue.")
+            a = input()
+        elif choice is 7:
             print("TY FOR COMING")
             return
 
