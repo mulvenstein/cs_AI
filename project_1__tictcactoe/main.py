@@ -6,6 +6,7 @@ sys.path.append( str(sys.path[0])+"/player_types" )
 from Player import *
 from MiniMax import *
 from TicTacToe import *
+from AlphaBeta import *
 
 def clear(): 
     # for windows 
@@ -24,7 +25,9 @@ def main():
         print("  1. PvP")
         print("  2. Minimax vs Player")
         print("  3. Watch Minimax vs Minimax")
-        print("  4. Exit")
+        print("  4. AB vs Human"
+        print("  5. AB vs AB"
+        print("  6. Exit")
 
         choice = int(input("  >> "))
         if choice is 1:
@@ -59,6 +62,28 @@ def main():
             print("\n...press enter to continue.")
             a = input()
         elif choice is 4:
+            clear()
+            print("==!ALPHABETA vs HUMAN!==\n")
+            p1 = AlphaBeta('X')
+            p2 = Player('O')
+            game = TicTacToe(p1, p2)
+            game.play_ttt()
+            del p1
+            del p2
+            print("\n...press enter to continue.")
+            a = input()
+        elif choice is 5:
+            clear()
+            print("==!ALPHABETA vs MiniMax!==\n")
+            p1 = MiniMax('X')
+            p2 = AlphaBeta('O')
+            game = TicTacToe(p1, p2)
+            game.play_ttt()
+            del p1
+            del p2
+            print("\n...press enter to continue.")
+            a = input()
+        elif choice is 6:
             print("TY FOR COMING")
             return
 
