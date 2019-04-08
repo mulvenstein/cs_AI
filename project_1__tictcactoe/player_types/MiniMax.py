@@ -38,15 +38,14 @@ class MiniMax(Player):
         # in order to cut down brnaching factor a bit, IF ai 
         #  is going first, just choose a corner.
         if len( self.available_positions(board) ) == 9:
-            return random.choice( [0,2,6,8] )
+            return random.choice( [0,2,6,8] ) , 10
         
         # ON THE MINIMAX TURN, YOU WANT THE BEST (MAX) OF THE OTHER PLAYERS TURNS(MIN)
         moves=[-10 for _ in range(9)] #move values
         for move in self.available_positions(board) : # for every child, is it a winner? is a successor a winner? else play random
             board[int(move)] = str(self.char)
-            r = (self.is_terminal_state(board))[0]
             if (self.is_terminal_state(board))[0] is True:
-                return move
+                return move, (self.is_terminal_state(board))[1]
             board_val = self.min_value(board)
             board[move] = '█'
             moves[move] = board_val
@@ -58,12 +57,12 @@ class MiniMax(Player):
                 board[c] = self.opponent
                 res = (self.is_terminal_state(board))[1]
                 if int(res) == int(-10):
-                    return c
+                    return c,0 #stops win so tie for now
                 board[c] = '█'
             c+=1 
 
         # otherwise play random move 
-        return moves.index(max(moves))
+        return moves.index(max(moves)) , max(moves)
 
         # if cant find a move there, just take a tie from here.    
         #   return random.choice(self.available_positions(board))

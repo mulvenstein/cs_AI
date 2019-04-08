@@ -83,16 +83,15 @@ class TicTacToe:
         print(line2)
         print(filler)
         print(line3)
-        print("\n")
+        # print("\n")
 
     '''
     actually play the game!
     '''
     def play_ttt(self):
-        
+        clear()
         while True:
-            clear()
-            self.turns_played += 1
+            #clear()
             if self.turn is self.x:
                 current_player = self.x
                 char = 'X'
@@ -103,11 +102,18 @@ class TicTacToe:
             if current_player.kind == 'human':
                 self.display_board()
 
-            move = current_player.move(self.board) #get move from player, validation is done within the current_players class
-            self.board[move] = char # place move
+            if current_player.kind != 'human':
+                move = current_player.move(self.board) #get move from player, validation is done within the current_players class
+                self.board[move[0]] = char # place move
+                print(current_player.kind + "(" + current_player.char + ")" + " chooses move " + str(move[0]) + " w/ value " + str(move[1]))
+            else:
+                move = current_player.move(self.board) #get move from player, validation is done within the current_players class
+                self.board[move] = char # place move
+
+            self.turns_played += 1
 
             if self.is_game_done() is True:
-                clear()
+                # clear()
                 self.display_board()
                 if self.winner == "TIE":
                     print("THERES A TIE")

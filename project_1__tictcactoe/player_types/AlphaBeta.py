@@ -39,7 +39,7 @@ class AlphaBeta(Player):
         '''
         # cut down pruning a bit and take corner if no other move has been made
         if len( self.available_positions(board) ) == 9:
-            return random.choice( [0,2,6,8] )
+            return random.choice( [0,2,6,8] ) , 10
 
         ALPHA = -10000
         BETA = 10000
@@ -54,8 +54,9 @@ class AlphaBeta(Player):
             board[moves] = '█'
             move_val[moves] = test_value
 
+        # print("ALPHABETA IS PICKING POS " + str(move_val.index(max(move_val))) + " with VALUE " + str(max(move_val)) )
         # pick max index and return!
-        return move_val.index(max(move_val))
+        return ( move_val.index(max(move_val)) , max(move_val) ) 
     
     def alpha_beta(self, board, turn, ALPHA , BETA): #just gonna use one function and splt it up instead of having a  min and max alphabeta
         # if terminal state, return val of win or loss
@@ -64,27 +65,27 @@ class AlphaBeta(Player):
         if res[0] is True:
             return res[1]
 
-        if turn == True: #max, cpu turn
+        if turn == True: #max, cpu's turn
             best = -10000
             turn = not turn
             for moves in self.available_positions(board):
                 board[moves] = self.char 
                 value = self.alpha_beta(board, turn, ALPHA, BETA)
                 board[moves] = '█' # try and set move back
-                best = max( best, value) 
-                ALPHA = max( ALPHA , best)
+                best = max( best, value ) 
+                ALPHA = max( ALPHA , best )
                 if BETA <= ALPHA:
                     break
             return best
-        else: #min, opp turn
+        else: #min, opponent's turn
             turn = not turn
             best = 10000  
             for moves in self.available_positions(board):
                 board[moves] = self.opponent
                 value = self.alpha_beta(board, turn, ALPHA, BETA)
                 board[moves] = '█'
-                best = min( best, value) 
-                BETA = min( BETA, best)
+                best = min( best, value ) 
+                BETA = min( BETA, best )
                 if BETA <= ALPHA:
                     break
             return best
