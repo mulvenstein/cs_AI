@@ -50,6 +50,9 @@ class AlphaBeta(Player):
         for moves in self.available_positions(board):
             # try AB search on every child state and use best!
             board[moves] = self.char
+            # test to see if terminal state rn
+            if (self.is_terminal_state(board))[0] is True and (self.is_terminal_state(board))[1] is 10:
+                return moves, 10
             test_value = self.alpha_beta(board, turn, ALPHA, BETA)
             board[moves] = '█'
             move_val[moves] = test_value
