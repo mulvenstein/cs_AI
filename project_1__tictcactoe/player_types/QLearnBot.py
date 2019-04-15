@@ -1,5 +1,6 @@
 import sys
 import time
+import math
 import os
 import random
 from Player import *
@@ -62,9 +63,27 @@ class QLearnBot(Player):
         for i in range(max_games):
             # training time!
             while True:
+                new_game = sample_game('X') # self is X, opp is O
+                while (new_game.is_win(new_game.board, new_game.char))[0] is False: # while game aint over
+                    action = choose_action(new_game) #pass entire object
                 print(i)
         
         return
+
+    def choose_action(board,cur_char, game_num):
+        # explore vs exploitation
+        prob_random = math.exp(-5*game_num/1000) #f(x) = e**(-5x/1000); x=currgame number and 1000 is max games
+        rand_num = random.uniform(0, 1)
+
+        if rand_num < prob_random : #explore!
+            #choose random from available positions
+            print("shiet")
+        else: #exploit
+            if cur_char == self.char: #max
+                next_action = max(self.qtable) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
+            else:
+                next_action = min(self.qtable) # RETURN MIN VALUE OF CURRENT STATES INDEX IN QTBALE
+        return next_action
 
     '''
     is game done given board state?
