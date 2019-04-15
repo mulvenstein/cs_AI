@@ -1,4 +1,4 @@
-import system
+import sys
 import time
 import os
 import random
@@ -31,7 +31,41 @@ class QLearnBot(Player):
     '''
     def train(self):
 
+        class sample_game: #mini vers of ttt game for training...shhh this is the worst fucking idea ever
+            def __init__(self, char):
+                self.board = ['_'*9]
+                self.char = char
+                if self.char == 'X':
+                    self.other = 'O'
+                else:
+                    self.other = 'X'
+            def is_win(self, board, char):
+                winning_states = ( [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] )
+                for a,b,c in winning_states:
+                    if board[a]==board[b]==board[c]==self.char:
+                        return (True, 10) #minimax won!
+                    elif board[a]==board[b]==board[c]==self.opponent:
+                        return (True, -10) #other player won
+            
+                space_counter = 0
+                for spot in board:
+                    if spot=='█':
+                        space_counter+=1
+                
+                if space_counter==0: #TIE
+                    return (True, 0)
+
+                return (False, 0) # aint over yet, chiefton
+
+
+        max_games = 1000
+        for i in range(max_games):
+            # training time!
+            while True:
+                print(i)
+        
         return
+
     '''
     is game done given board state?
     '''
