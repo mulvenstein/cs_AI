@@ -25,7 +25,13 @@ class QLearnBot(Player):
             print("no qtable found. TRAINING DATA.")
             time.sleep(1.5)
 
+    '''
+    If no q table existed, game needs to be trained. this is where the magic happens, then it will
+    play the game specified.
+    '''
+    def train(self):
 
+        return
     '''
     is game done given board state?
     '''
@@ -50,4 +56,6 @@ class QLearnBot(Player):
 
     def move(self, board):
         return random.choice([range(9)])
+
+    
     
