@@ -34,7 +34,7 @@ class QLearnBot(Player):
 
         class sample_game: #mini vers of ttt game for training...shhh this is the worst fucking idea ever
             def __init__(self, char):
-                self.board = ['_'*9]
+                self.board = ['_']*9
                 self.char = char
                 if self.char == 'X':
                     self.other = 'O'
@@ -77,7 +77,8 @@ class QLearnBot(Player):
 
         if rand_num < prob_random : #explore!
             #choose random from available positions
-            print("shiet")
+            free_spots = [ x for x,y in enumerate(board) if str(y)=='_' ]
+            next_action = random.choice(free_spots)
         else: #exploit
             if cur_char == self.char: #max
                 next_action = max(self.qtable) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
