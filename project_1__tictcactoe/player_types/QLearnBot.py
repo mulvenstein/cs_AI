@@ -125,14 +125,14 @@ class QLearnBot(Player):
                 # grabs board spot with highest value
                 # print(" max " + str( max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) ) )
                 try:
-                    next_action = max( self.qtable[i] for i in ( x for x in self.qtable.keys() if x[0] is board) ) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
+                    next_action = max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
                 except: 
                     next_action = random.choice([x for x,y in enumerate(board) if str(y)=='_'])
                     # print("BOARD " + board + "  " + str([x for x in self.qtable.keys() ]) )
                     # input("HEERE")
             else:
                 try:
-                    next_action = min( self.qtable[i] for i in ( x for x in self.qtable.keys() if x[0] is board) ) # RETURN MIN VALUE OF CURRENT STATES INDEX IN QTBALE
+                    next_action = min( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MIN VALUE OF CURRENT STATES INDEX IN QTBALE
                 except:
                     next_action = random.choice([x for x,y in enumerate(board) if str(y)=='_'])
         next_action = int(next_action) # convert to int just in case!
@@ -167,7 +167,12 @@ class QLearnBot(Player):
 
 
     def move(self, board):
-        return random.choice([range(9)])
+        # if we are in move spot, then data has been trained.
+        # try to return max of qtable of state, elseeee random choice...
+        try:
+            return max(  )
+        except:
+            return random.choice( [ x for x,y in enumerate(board) if str(y)=='_' ] )
 
     
     
