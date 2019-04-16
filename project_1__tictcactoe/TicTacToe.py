@@ -114,14 +114,21 @@ class TicTacToe:
 
             if self.is_game_done() is True:
                 # clear()
+                winner = '' #1-xwin 0-tie -1-owin
                 self.display_board()
                 if self.winner == "TIE":
                     print("THERES A TIE")
+                    winner = 0
                 else:
                     clear()
                     self.display_board()
                     print(str(self.winner) + " HAS WON")
-                return True
+                    if self.winner == self.x.char :
+                        winner = 1
+                    else:
+                        winner = -1
+                return (True, winner)
+                
 
             if self.x.kind != 'human'  and 'human' != self.o.kind  :
                 self.display_board()

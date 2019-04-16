@@ -4,29 +4,33 @@ import math
 import os
 import random
 import copy
-from Player import *
+
+sys.path.append( str(sys.path[0])+"/../" )
+
+from AlphaBeta import *
+from TicTacToe import *
 
 class QLearnBot(Player):
-    def __init__(self, char):
+    def __init__(self, char, qtable={}):
         self.char = char
         self.kind = "QLEARN"
         if self.char == 'X':
             self.opponent = 'O'
         else :
             self.opponent = 'X'
-        self.qtable = {}
+        self.qtable = qtable
         #check for q table
-    
-        exists = os.path.isfile('qtable.txt')
-        if exists:
-            print("QTable exsits. using existing functionality") 
-            with open('qtable.txt') as f:
-                self.qtable = eval(f.read()) # set self.qtable as previous values!
-            time.sleep(1.0)
-        else:
-            print("no qtable found. TRAINING DATA.")
-            # time.sleep(1.5)
-            self.train()
+        if len(qtable) == 0: 
+            exists = os.path.isfile('qtable.txt')
+            if exists:
+                print("QTable exsits. using existing functionality") 
+                with open('qtable.txt') as f:
+                    self.qtable = eval(f.read()) # set self.qtable as previous values!
+                time.sleep(1.0)
+            else:
+                print("no qtable found. TRAINING DATA.")
+                # time.sleep(1.5)
+                self.train()
 
     '''
     If no q table existed, game needs to be trained. this is where the magic happens, then it will
@@ -50,8 +54,24 @@ class QLearnBot(Player):
                     self.char = 'X'
                     self.other = 'O'
 
-        max_games = 1000
+        max_ties = 0 # if passed, it tied AB 10 times...
+        max_games = 10000
         for i in range(max_games):
+            if i % 30 == 0: #play AB ten times
+                p1 = QLearnBot('X', self.qtable)
+                p2 = AlphaBeta('O')
+                max_ties = 0
+                for i in range(10):
+                    g = TicTacToe(p1,p2)
+                    a = g.play_ttt()
+                    if a[1] == 1:
+                        max_ties += 1
+                    else:
+                        break #not worth to keep playing when it isnt ready
+                        
+            if max_ties == 10:
+                print("training done.")
+                break
             # print(i)
             # training time!
             board = ['█'] * 9
@@ -111,7 +131,7 @@ class QLearnBot(Player):
 
     def choose_action(self, board,cur_char, game_num):
         # explore vs exploitation
-        prob_random = math.exp(-5*game_num/1000) #f(x) = e**(-5x/1000); x=currgame number and 1000 is max games
+        prob_random = math.exp(-5*game_num/10000) #f(x) = e**(-5x/1000); x=currgame number and 1000 is max games
         rand_num = random.uniform(0, 1)
 
         board = ''.join( str(i) for i in board ) #converts board to string
@@ -170,12 +190,13 @@ class QLearnBot(Player):
         # if we are in move spot, then data has been trained.
         # try to return max of qtable of state, elseeee random choice...
         try:
-            b = ''.join( str(i) for i in board )
+            # b = ''.join( str(i) for i in board )
             # print("state : " + str(b) +" with qtable entries" + str( [ x for x in self.qtable if x[0] is b ]))
-            print("state : " + str(b) +" with qtable entries" + str( list( set([x[0] for x in self.qtable.keys()]) ) ))
-            input("...")
+            # print("state : " + str(b) +" with qtable entries" + str( list( set([x[0] for x in self.qtable.keys()]) ) ))
+            # input("...")
             return int( max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) )
         except:
+            # should never be here.
             return random.choice( [ x for x,y in enumerate(board) if str(y)=='█' ] )
 
     
