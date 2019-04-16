@@ -123,9 +123,18 @@ class QLearnBot(Player):
         else: #exploit
             if cur_char == self.char: #max
                 # grabs board spot with highest value
-                next_action = max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
+                # print(" max " + str( max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) ) )
+                try:
+                    next_action = max( self.qtable[i] for i in ( x for x in self.qtable.keys() if x[0] is board) ) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
+                except: 
+                    next_action = random.choice([x for x,y in enumerate(board) if str(y)=='_'])
+                    # print("BOARD " + board + "  " + str([x for x in self.qtable.keys() ]) )
+                    # input("HEERE")
             else:
-                next_action = min( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MIN VALUE OF CURRENT STATES INDEX IN QTBALE
+                try:
+                    next_action = min( self.qtable[i] for i in ( x for x in self.qtable.keys() if x[0] is board) ) # RETURN MIN VALUE OF CURRENT STATES INDEX IN QTBALE
+                except:
+                    next_action = random.choice([x for x,y in enumerate(board) if str(y)=='_'])
         next_action = int(next_action) # convert to int just in case!
         return next_action
 
