@@ -52,9 +52,9 @@ class QLearnBot(Player):
 
         max_games = 1000
         for i in range(max_games):
-            print(i)
+            # print(i)
             # training time!
-            board = ['_'] * 9
+            board = ['█'] * 9
             new_game = sample_game('X')
             while (self.is_terminal_state(board, new_game.char))[0] is False:
                 # self is X, opp is O
@@ -118,7 +118,7 @@ class QLearnBot(Player):
 
         if rand_num < prob_random : #explore!
             #choose random from available positions
-            free_spots = [ x for x,y in enumerate(board) if str(y)=='_' ]
+            free_spots = [ x for x,y in enumerate(board) if str(y)=='█' ]
             next_action = random.choice(free_spots)
         else: #exploit
             if cur_char == self.char: #max
@@ -127,14 +127,14 @@ class QLearnBot(Player):
                 try:
                     next_action = max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
                 except: 
-                    next_action = random.choice([x for x,y in enumerate(board) if str(y)=='_'])
+                    next_action = random.choice([x for x,y in enumerate(board) if str(y)=='█'])
                     # print("BOARD " + board + "  " + str([x for x in self.qtable.keys() ]) )
                     # input("HEERE")
             else:
                 try:
                     next_action = min( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MIN VALUE OF CURRENT STATES INDEX IN QTBALE
                 except:
-                    next_action = random.choice([x for x,y in enumerate(board) if str(y)=='_'])
+                    next_action = random.choice([x for x,y in enumerate(board) if str(y)=='█'])
         next_action = int(next_action) # convert to int just in case!
         return next_action
 
@@ -157,7 +157,7 @@ class QLearnBot(Player):
         
         space_counter = 0
         for spot in board:
-            if spot=='_':
+            if spot=='█':
                 space_counter+=1
         
         if space_counter==0: #TIE
@@ -170,9 +170,13 @@ class QLearnBot(Player):
         # if we are in move spot, then data has been trained.
         # try to return max of qtable of state, elseeee random choice...
         try:
-            return max(  )
+            b = ''.join( str(i) for i in board )
+            # print("state : " + str(b) +" with qtable entries" + str( [ x for x in self.qtable if x[0] is b ]))
+            print("state : " + str(b) +" with qtable entries" + str( list( set([x[0] for x in self.qtable.keys()]) ) ))
+            input("...")
+            return int( max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) )
         except:
-            return random.choice( [ x for x,y in enumerate(board) if str(y)=='_' ] )
+            return random.choice( [ x for x,y in enumerate(board) if str(y)=='█' ] )
 
     
     

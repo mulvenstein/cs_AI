@@ -7,6 +7,7 @@ from Player import *
 from MiniMax import *
 from TicTacToe import *
 from AlphaBeta import *
+from QLearnBot import *
 
 def clear(): 
     # for windows 
@@ -28,7 +29,8 @@ def main():
         print("  4. AB vs Human")
         print("  5. WATCH AB vs MiniMax")
         print("  6. WATCH AB vs AB")
-        print("  7. Exit")
+        print("  7. Player vs QLEARN")
+        print("  8. Exit")
 
         choice = int(input("  >> "))
         if choice is 1:
@@ -96,6 +98,17 @@ def main():
             print("\n...press enter to continue.")
             a = input()
         elif choice is 7:
+            clear()
+            print("==!PLAYER vs QLEARN!==\n")
+            p1 = Player('X')
+            p2 = QLearnBot('O')
+            game = TicTacToe(p1, p2)
+            game.play_ttt()
+            del p1
+            del p2
+            print("\n...press enter to continue.")
+            a = input()
+        elif choice is 8:
             print("TY FOR COMING")
             return
 

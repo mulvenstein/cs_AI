@@ -102,7 +102,7 @@ class TicTacToe:
             if current_player.kind == 'human':
                 self.display_board()
 
-            if current_player.kind != 'human':
+            if current_player.kind != 'human' and current_player.kind!='QLEARN':
                 move = current_player.move(self.board) #get move from player, validation is done within the current_players class
                 self.board[move[0]] = char # place move
                 print(current_player.kind + "(" + current_player.char + ")" + " chooses move " + str(move[0]) + " w/ value " + str(move[1]))
