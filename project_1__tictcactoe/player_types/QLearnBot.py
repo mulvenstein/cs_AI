@@ -37,7 +37,6 @@ class QLearnBot(Player):
     play the game specified.
     '''
     def train(self):
-        print("TRAINING DATA begining")
         class sample_game: #mini vers of ttt game for training...shhh this is the worst fucking idea ever
             def __init__(self, char):
                 self.char = char
@@ -57,21 +56,21 @@ class QLearnBot(Player):
         max_ties = 0 # if passed, it tied AB 10 times...
         max_games = 10000
         for i in range(max_games):
-            if i % 30 == 0: #play AB ten times
-                p1 = QLearnBot('X', self.qtable)
-                p2 = AlphaBeta('O')
-                max_ties = 0
-                for i in range(10):
-                    g = TicTacToe(p1,p2)
-                    a = g.play_ttt()
-                    if a[1] == 1:
-                        max_ties += 1
-                    else:
-                        break #not worth to keep playing when it isnt ready
+            # if i % 30 == 0: #play AB ten times
+            #     p1 = QLearnBot('X', self.qtable)
+            #     p2 = AlphaBeta('O')
+            #     max_ties = 0
+            #     for i in range(10):
+            #         g = TicTacToe(p1,p2)
+            #         a = g.play_ttt()
+            #         if a[1] == 1:
+            #             max_ties += 1
+            #         else:
+            #             break #not worth to keep playing when it isnt ready
                         
-            if max_ties == 10:
-                print("training done.")
-                break
+            # if max_ties == 10:
+            #     print("training done.")
+            #     break
             # print(i)
             # training time!
             board = ['█'] * 9
@@ -102,7 +101,7 @@ class QLearnBot(Player):
 
     def update_q(self, reward, char, action, state, new_state):
         # print("IN Q TABLE")
-        gamma = .9 
+        gamma = .1
         alpha = .7
         # need to ocnvert board and new board to strings like "OXOOXOXXO" or "_________"
         state = ''.join( str(i) for i in state )

@@ -100,8 +100,8 @@ def main():
         elif choice is 7:
             clear()
             print("==!PLAYER vs QLEARN!==\n")
-            p1 = Player('X')
-            p2 = QLearnBot('O')
+            p2 = Player('X')
+            p1 = QLearnBot('O')
             game = TicTacToe(p1, p2)
             game.play_ttt()
             del p1
