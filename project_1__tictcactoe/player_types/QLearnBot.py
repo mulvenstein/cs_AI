@@ -150,13 +150,18 @@ class QLearnBot(Player):
                 try:
                     free_spots = [x for x,y in enumerate(board) if str(y)=='█']
                     wins = []
+                    blocks = []
                     # look over wins, if can go, do it, else, random
                     for i in free_spots:
                         board[i] = cur_char
                         if (self.is_terminal_state(board, cur_char))[1] is 10:
                             wins.append(i)
+                        elif (self.is_terminal_state(board, cur_char))[1] is -10:
+                            blocks.append(i)
                     if len(wins) > 0: 
                         next_action = random.choice( wins )
+                    elif len(blocks) > 0:
+                        next_action = random.choice( blocks )
                     else:
                         next_action = random.choice( free_spots )
                     # next_action = max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
