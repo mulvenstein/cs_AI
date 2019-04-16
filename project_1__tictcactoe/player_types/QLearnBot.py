@@ -14,6 +14,8 @@ class QLearnBot(Player):
     def __init__(self, char, qtable={}):
         self.char = char
         self.kind = "QLEARN"
+        self.explored = 0
+        self.exploited =0
         if self.char == 'X':
             self.opponent = 'O'
         else :
@@ -54,7 +56,7 @@ class QLearnBot(Player):
                     self.other = 'O'
 
         max_ties = 0 # if passed, it tied AB 10 times...
-        max_games = 10000
+        max_games = 5000
         for i in range(max_games):
             # if i % 30 == 0: #play AB ten times
             #     p1 = QLearnBot('X', self.qtable)
@@ -96,7 +98,8 @@ class QLearnBot(Player):
         sys.stdout = open("qtable.txt", "w")
         print(self.qtable)
         sys.stdout = sys.__stdout__ #save to file!
-
+        print("explored vs exploited: " + str(self.explored) + " vs " + str(self.exploited))
+        input("cont...")
         return True
 
     def update_q(self, reward, char, action, state, new_state):
@@ -130,7 +133,7 @@ class QLearnBot(Player):
 
     def choose_action(self, board,cur_char, game_num):
         # explore vs exploitation
-        prob_random = math.exp(-5*game_num/10000) #f(x) = e**(-5x/1000); x=currgame number and 1000 is max games
+        prob_random = math.exp(-5*game_num/5000) #f(x) = e**(-5x/1000); x=currgame number and 1000 is max games
         rand_num = random.uniform(0, 1)
 
         board = ''.join( str(i) for i in board ) #converts board to string
@@ -139,17 +142,29 @@ class QLearnBot(Player):
             #choose random from available positions
             free_spots = [ x for x,y in enumerate(board) if str(y)=='█' ]
             next_action = random.choice(free_spots)
+            self.explored += 1
         else: #exploit
+            self.exploited += 1
             if cur_char == self.char: #max
                 # grabs board spot with highest value
-                # print(" max " + str( max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) ) )
                 try:
-                    next_action = max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
+                    free_spots = [x for x,y in enumerate(board) if str(y)=='█']
+                    wins = []
+                    # look over wins, if can go, do it, else, random
+                    for i in free_spots:
+                        board[i] = cur_char
+                        if (self.is_terminal_state(board, cur_char))[1] is 10:
+                            wins.append(i)
+                    if len(wins) > 0: 
+                        next_action = random.choice( wins )
+                    else:
+                        next_action = random.choice( free_spots )
+                    # next_action = max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
                 except: 
                     next_action = random.choice([x for x,y in enumerate(board) if str(y)=='█'])
                     # print("BOARD " + board + "  " + str([x for x in self.qtable.keys() ]) )
                     # input("HEERE")
-            else:
+            else: #min, but bot is always maxing so i dont think this will ever be visited.
                 try:
                     next_action = min( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MIN VALUE OF CURRENT STATES INDEX IN QTBALE
                 except:
@@ -197,6 +212,3 @@ class QLearnBot(Player):
         except:
             # should never be here.
             return random.choice( [ x for x,y in enumerate(board) if str(y)=='█' ] )
-
-    
-    
