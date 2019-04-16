@@ -136,7 +136,7 @@ class QLearnBot(Player):
         prob_random = math.exp(-5*game_num/5000) #f(x) = e**(-5x/1000); x=currgame number and 1000 is max games
         rand_num = random.uniform(0, 1)
 
-        board = ''.join( str(i) for i in board ) #converts board to string
+        # board = ''.join( str(i) for i in board ) #converts board to string
 
         if rand_num < prob_random : #explore!
             #choose random from available positions
@@ -154,9 +154,9 @@ class QLearnBot(Player):
                     # look over wins, if can go, do it, else, random
                     for i in free_spots:
                         board[i] = cur_char
-                        if (self.is_terminal_state(board, cur_char))[1] is 10:
+                        if (self.is_terminal_state(board, cur_char))[1] is 1:
                             wins.append(i)
-                        elif (self.is_terminal_state(board, cur_char))[1] is -10:
+                        elif (self.is_terminal_state(board, cur_char))[1] is -1:
                             blocks.append(i)
                     if len(wins) > 0: 
                         next_action = random.choice( wins )
@@ -166,7 +166,22 @@ class QLearnBot(Player):
                         next_action = random.choice( free_spots )
                     # next_action = max( i[1] for i in ( x for x in self.qtable.keys() if x[0] is board ) ) # RETURN MAX VALUE OF CURRENT STATES INDEX IN QTBALE
                 except: 
-                    next_action = random.choice([x for x,y in enumerate(board) if str(y)=='█'])
+                    free_spots = [x for x,y in enumerate(board) if str(y)=='█']
+                    lose = []
+                    blocks = []
+                    # look over wins, if can go, do it, else, random
+                    for i in free_spots:
+                        board[i] = cur_char
+                        if (self.is_terminal_state(board, cur_char))[1] is -1:
+                            lose.append(i)
+                        elif (self.is_terminal_state(board, cur_char))[1] is 0 and (self.is_terminal_state(board, cur_char))[0] is True:
+                            blocks.append(i)
+                    if len(lose) > 0: 
+                        next_action = random.choice( wins )
+                    elif len(blocks) > 0:
+                        next_action = random.choice( blocks )
+                    else:
+                        next_action = random.choice( free_spots )
                     # print("BOARD " + board + "  " + str([x for x in self.qtable.keys() ]) )
                     # input("HEERE")
             else: #min, but bot is always maxing so i dont think this will ever be visited.
