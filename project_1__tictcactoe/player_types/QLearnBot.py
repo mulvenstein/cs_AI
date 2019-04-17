@@ -67,8 +67,8 @@ def train():
     # if no qtable was passed, lets train!
     games = 20000
     p1 = QLearnBot('X', _train=False) 
-    p2 = QLearnBot9('Y', _train=False)
-    for i in games:
+    p2 = QLearnBot('Y', _train=False)
+    for i in range(games):
         t=TicTacToe(p1,p2)
         t.play_ttt()
     return p1.qtable
