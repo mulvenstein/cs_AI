@@ -38,7 +38,12 @@ class QLearnBot(Player):
 
     def learn(self, state, action, reward, result_state):
         prev = self.q_lookup(state, action)
-        maxqnew = max( [ self.q_lookup(result_state, a) for a in self.available_positions(state) ] )
+        try: #if its a tie or game full this isnt workin 
+            maxqnew = max( [ self.q_lookup(result_state, a) for a in self.available_positions(result_state) ] )
+        except: # so instead use reward as maxqnew
+            # print("vail pos : " + str(self.available_positions(result_state)) + " on board " + str(result_state) )
+            # input("cont")
+            maxqnew = reward
         state = ''.join( str(i) for i in state )
         self.qtable[ (state, action) ] = prev + self.alpha * ((reward + self.gamma*maxqnew) - prev)
 
@@ -67,8 +72,9 @@ def train():
     # if no qtable was passed, lets train!
     games = 20000
     p1 = QLearnBot('X', _train=False) 
-    p2 = QLearnBot('Y', _train=False)
+    p2 = QLearnBot('O', _train=False)
     for i in range(games):
+        print("training game ... " + str(i) + " out of "+ str(games) )
         t=TicTacToe(p1,p2)
-        t.play_ttt()
+        t.train_ttt()
     return p1.qtable

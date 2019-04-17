@@ -89,7 +89,63 @@ class TicTacToe:
     actually play the game!
     '''
     def play_ttt(self):
-        clear()
+        # clear()
+        while True:
+            #clear()
+            if self.turn is self.x:
+                current_player = self.x
+                other_player = self.o
+                char = 'X'
+            else:
+                current_player = self.o
+                other_player = self.x
+                char = 'O'
+
+            if current_player.kind == 'human':
+                self.display_board()
+
+            if current_player.kind != 'human' and current_player.kind!='QLEARN':
+                move = current_player.move(self.board) #get move from player, validation is done within the current_players class
+                self.board[move[0]] = char # place move
+                print(current_player.kind + "(" + current_player.char + ")" + " chooses move " + str(move[0]) + " w/ value " + str(move[1]))
+            else:
+                move = current_player.move(self.board) #get move from player, validation is done within the current_players class
+                self.board[move] = char # place move
+
+            self.turns_played += 1
+
+            if self.is_game_done() is True:
+                clear()
+                winner = '' #1-xwin 0-tie -1-owin
+                self.display_board()
+                if self.winner == "TIE":
+                    print("THERES A TIE")
+                    current_player.reward(.5, self.board)
+                    other_player.reward(.5, self.board)
+                else:
+                    clear()
+                    self.display_board()
+                    print(str(self.winner) + " HAS WON")
+                    if current_player == self.winner: 
+                        current_player.reward(1, self.board)
+                        other_player.reward(-1, self.board)
+                    else:
+                        current_player.reward(-1, self.board)
+                        other_player.reward(1, self.board)
+                return True
+            other_player.reward(0, self.board)
+
+            if self.x.kind != 'human'  and 'human' != self.o.kind  :
+                self.display_board()
+                time.sleep(1.5)
+
+            if self.turn == self.x:
+                self.turn = self.o
+            else:
+                self.turn = self.x
+
+    def train_ttt(self): #same as play but without printing and gives reward. respek the spaghet code
+        # clear()
         while True:
             #clear()
             if self.turn is self.x:
@@ -119,13 +175,13 @@ class TicTacToe:
                 winner = '' #1-xwin 0-tie -1-owin
                 # self.display_board()
                 if self.winner == "TIE":
-                    print("THERES A TIE")
+                    # print("THERES A TIE")
                     current_player.reward(.5, self.board)
                     other_player.reward(.5, self.board)
                 else:
-                    clear()
+                    # clear()
                     # self.display_board()
-                    print(str(self.winner) + " HAS WON")
+                    # print(str(self.winner) + " HAS WON")
                     if current_player == self.winner: 
                         current_player.reward(1, self.board)
                         other_player.reward(-1, self.board)
