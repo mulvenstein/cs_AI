@@ -130,9 +130,9 @@ class TicTacToe:
                 return (True, winner)
                 
 
-            if self.x.kind != 'human'  and 'human' != self.o.kind  :
-                self.display_board()
-                time.sleep(1.5)
+            # if self.x.kind != 'human'  and 'human' != self.o.kind  :
+            #     self.display_board()
+            #     time.sleep(1.5)
 
             if self.turn == self.x:
                 self.turn = self.o
