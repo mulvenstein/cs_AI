@@ -11,7 +11,7 @@ from TicTacToe import *
 from Player import *
 
 class QLearnBot(Player):
-    def __init__(self, char, qtable={}, epsilon=0.2, alpha=0.3, gamma=0.9):
+    def __init__(self, char, qtable={}, epsilon=0.2, alpha=0.3, gamma=0.9, _train=True):
         self.char = char
         self.kind = "QLEARN"
         self.qtable = qtable
@@ -21,6 +21,9 @@ class QLearnBot(Player):
         self.opponent = 'O' if char is 'X' else 'X'
         self.previous_state = [ '█' for _ in range(9) ]
         self.previous_move = None
+
+        if len(self.qtable) is 0 and _train :
+            q_table = train() #train it brother
 
     def q_lookup(self, state, action): # state is board, action is where next piece is goin
         state = ''.join( str(i) for i in state ) # convert state to a string to qtable entries are [ (string, int) ] = val
@@ -60,6 +63,12 @@ class QLearnBot(Player):
         self.previous_move = actions[i]
         return actions[i]
     
-    def train(self):
-        # if no qtable was passed, lets train!
-        
+def train():
+    # if no qtable was passed, lets train!
+    games = 20000
+    p1 = QLearnBot('X', _train=False) 
+    p2 = QLearnBot9('Y', _train=False)
+    for i in games:
+        t=TicTacToe(p1,p2)
+        t.play_ttt()
+    return p1.qtable
