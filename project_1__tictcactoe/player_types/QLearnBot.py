@@ -70,8 +70,8 @@ class QLearnBot(Player):
     
 def train():
     # if no qtable was passed, lets train!
-    games = 20000
-    p1 = QLearnBot('X', _train=False) 
+    games = 200000
+    p1 = QLearnBot('X', _train=False) #_train is if the new instance needs to be trained. these are the trainers so thats why its false
     p2 = QLearnBot('O', _train=False)
     for i in range(games):
         print("training game ... " + str(i) + " out of "+ str(games) )
