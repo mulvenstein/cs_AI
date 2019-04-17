@@ -29,7 +29,7 @@ class QLearnBot(Player):
             self.qtable[(state, action)] = 1.0
         return self.qtable.get((state, action))
 
-    def get_reward(self, value, board):
+    def reward(self, value, board):
         if self.previous_move is not None:
             self.learn(self.previous_state, self.previous_move, value, board)
 
@@ -59,3 +59,7 @@ class QLearnBot(Player):
 
         self.previous_move = actions[i]
         return actions[i]
+    
+    def train(self):
+        # if no qtable was passed, lets train!
+        

@@ -9,5 +9,9 @@ class Player:
             if board[move] != "X" and board[move] != "O" and move >= 0 and move <= 9:
                 return move
 
+    def reward(self, value, board):
+        # i need to make something here so the oter bots like AB wont break against qlearn
+        return
+
     def available_positions(self, board):
         return [i for i in range(0, 9) if board[i] == '█']
