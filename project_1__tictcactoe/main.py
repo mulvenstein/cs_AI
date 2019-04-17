@@ -100,13 +100,16 @@ def main():
         elif choice is 7:
             clear()
             print("==!PLAYER vs QLEARN!==\n")
-            p2 = Player('X')
             p1 = QLearnBot('O')
-            game = TicTacToe(p1, p2)
-            game.play_ttt()
+            p2 = Player('X')
+            a = ''
+            while a!='q'or a!='Q':
+                game = TicTacToe(p1, p2)
+                game.play_ttt()
+                a = input("...press Q to quit or anything else to continue.")
             del p1
             del p2
-            print("\n...press enter to continue.")
+            # print("\n...press enter to continue.")
             a = input()
         elif choice is 8:
             print("TY FOR COMING")
